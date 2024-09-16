@@ -90,7 +90,7 @@ const privateMessages = ref(true)
                 >
                   Preferred name
                 </BaseHeading>
-                <BaseText size="sm">Maya Rosselini</BaseText>
+                <BaseText size="sm">Maya Rosselini adfasdfasd</BaseText>
               </div>
               <Icon name="lucide:edit-3" class="ms-auto size-4" />
               <BaseText
