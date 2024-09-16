@@ -363,7 +363,6 @@
                                 name="hairdresser"
                                 :value="user.id"
                                 class="hidden"
-                                :id="user.id"
                               />
                               <div class="flex items-center space-x-2">
                                 <BaseAvatar
@@ -1115,7 +1114,7 @@ const authStore = useAuthStore();
 import { useAuthStore } from "~/stores/auth";
 const { token } = useAuthStore();
 
-import "v-calendar/dist/style.css";
+// import "v-calendar/dist/style.css";
 import "~/assets/css/vcalendar.css";
 import { useHead } from "#app";
 import { definePageMeta } from "#imports"; // Ensure this import is correct for Nuxt 3
@@ -1123,6 +1122,16 @@ import { definePageMeta } from "#imports"; // Ensure this import is correct for 
 // define api_route
 const config = useRuntimeConfig();
 const apiUrl = config.public.apiUrl;
+
+
+import { defineProps } from 'vue'
+
+const props = defineProps({
+  id: {
+    type: String,
+    required: true
+  }
+})
 
 // Set page meta and head elements
 useHead({

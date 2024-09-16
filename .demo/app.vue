@@ -73,15 +73,9 @@ useHead({
 
 <template>
   <div>
-    <!--
-      Global app search modal
-      @see .demo/components/DemoAppSearch.vue
-    -->
+
     <DemoAppSearch />
-    <!--
-      Global app layout switcher
-      @see .demo/components/DemoAppLayoutSwitcher.vue
-    -->
+
     <DemoAppLayoutSwitcher />
 
     <!--

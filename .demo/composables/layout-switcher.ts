@@ -7,8 +7,8 @@
 import {
   TairoCollapseLayout,
   TairoSidebarLayout,
-  TairoTopnavLayout,
-  TairoIconnavLayout,
+  // TairoTopnavLayout,
+  // TairoIconnavLayout,
 } from '#components'
 
 export function useLayoutSwitcher() {
@@ -23,16 +23,16 @@ export function useLayoutSwitcher() {
       label: 'Collapse',
       component: TairoCollapseLayout,
     },
-    {
-      name: 'topnav',
-      label: 'Top navigation',
-      component: TairoTopnavLayout,
-    },
-    {
-      name: 'iconnav',
-      label: 'Icon top navigation',
-      component: TairoIconnavLayout,
-    },
+    // {
+    //   name: 'topnav',
+    //   label: 'Top navigation',
+    //   component: TairoTopnavLayout,
+    // },
+    // {
+    //   name: 'iconnav',
+    //   label: 'Icon top navigation',
+    //   component: TairoIconnavLayout,
+    // },
   ] as const
 
   const activeLayoutName = useState('layout-switcher-active', () => 'sidebar')
