@@ -212,6 +212,7 @@ const selectedEventFeatures = computed({
 // my coden 
 // Function to send booking data to the backend
 import { ref, computed, reactive } from 'vue';
+const { token } = useAuthStore()
 // define api_route
 const config = useRuntimeConfig()
 const apiUrl = config.public.apiUrl
@@ -259,9 +260,10 @@ async function sendBookingData(event: CalendarEvent) {
     const response = await fetch(`${apiUrl}/api/v1/admin-booking`, {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-      },
+      Accept: "application/json",
+      Authorization: `Bearer ${token}`, // Use backticks for template literals
+      "Content-Type": "application/json", // Ensure this is included
+    },
       body: JSON.stringify({
         firstname: event.firstname,
         lastname: event.lastname,

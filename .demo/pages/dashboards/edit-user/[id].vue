@@ -1,13 +1,14 @@
 <script setup>
-
 // define api_route
-const config = useRuntimeConfig()
-const apiUrl = config.public.apiUrl
+const config = useRuntimeConfig();
+const apiUrl = config.public.apiUrl;
 
 definePageMeta({
   layout: "default",
 });
 
+import { useAuthStore } from "~/stores/auth";
+const { token } = useAuthStore();
 
 import { ref, onMounted } from "vue";
 import { useRoute } from "vue-router";
@@ -27,7 +28,14 @@ const zipcode = ref("");
 onMounted(async () => {
   try {
     const id = route.params.id;
-    const response = await fetch(`${apiUrl}/api/v1/get-user/${id}`);
+    const response = await fetch(`${apiUrl}/api/v1/get-user/${id}`, {
+      method: "GET", // Method can be 'GET' or any other HTTP method if required
+      headers: {
+        Accept: "application/json",
+        Authorization: `Bearer ${token}`, // Use backticks for template literals
+        "Content-Type": "application/json", // Ensure this is included
+      },
+    });
     if (!response.ok) {
       throw new Error("Network response was not ok");
     }
@@ -62,16 +70,15 @@ const handleSubmit = async () => {
       zipcode: zipcode.value,
     };
 
-    const response = await fetch(
-      `${apiUrl}/api/v1/update-user/${id}`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(updatedUser),
-      }
-    );
+    const response = await fetch(`${apiUrl}/api/v1/update-user/${id}`, {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        Authorization: `Bearer ${token}`, // Use backticks for template literals
+        "Content-Type": "application/json", // Ensure this is included
+      },
+      body: JSON.stringify(updatedUser),
+    });
 
     const result = await response.json();
 
@@ -101,9 +108,9 @@ const handleSubmit = async () => {
           class: "end-2 top-2",
           closable: true,
         });
+      }
     }
-  }
-} catch (error) {
+  } catch (error) {
     console.error("Error updating user data:", error);
     // Show a general error toaster for exceptions
     const toaster = useToaster();
@@ -117,7 +124,6 @@ const handleSubmit = async () => {
     });
   }
 };
-
 </script>
 
 <template>

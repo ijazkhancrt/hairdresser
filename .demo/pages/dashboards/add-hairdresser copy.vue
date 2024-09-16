@@ -15,6 +15,7 @@ definePageMeta({
 // my code 
 import { useAuthStore } from '~/stores/auth'
 const authStore = useAuthStore()
+const { token } = useAuthStore()
 
 // define api_route
 const config = useRuntimeConfig()
@@ -41,7 +42,9 @@ function handleSubmit() {
   fetch(`${apiUrl}/api/v1/add-hairdresser`, {
     method: 'POST',
     headers: {
-      'Content-Type': 'application/json'
+      Accept: "application/json",
+      Authorization: `Bearer ${token}`, // Use backticks for template literals
+      "Content-Type": "application/json", // Ensure this is included
     },
     body: JSON.stringify(payload)
   })

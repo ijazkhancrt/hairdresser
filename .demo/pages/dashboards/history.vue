@@ -2,6 +2,7 @@
 
 // my code 
 import { useAuthStore } from '~/stores/auth'
+const { token } = useAuthStore()
 const authStore = useAuthStore()
 
 // define api_route
@@ -23,19 +24,16 @@ const serviceDescriptions = {
 // Define a ref to hold booking data
 const bookings = ref([]);
 
-// Fetch data on component mount
 onMounted(async () => {
   try {
     const response = await fetch(`${apiUrl}/api/v1/get-all-bookings`);
     const data = await response.json();
     bookings.value = data.bookings;
-    console.log(data.bookings);
-    console.log(bookings.value);
-
   } catch (error) {
     console.error('Error fetching bookings:', error);
   }
 });
+
 
 
 // budge

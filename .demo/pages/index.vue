@@ -27,11 +27,11 @@
             <li class="custom-nav-item">
               <NuxtLink class="nav-link" to="/about">About</NuxtLink>
             </li>
-            
+
             <li class="custom-nav-item">
               <NuxtLink class="nav-link" to="/contact">Contact</NuxtLink>
             </li>
-            <li class="custom-nav-item"  v-if="authStore.is_login">
+            <li class="custom-nav-item" v-if="authStore.is_login">
               <NuxtLink class="nav-link" to="/dashboards">Dashboard</NuxtLink>
             </li>
           </ul>
@@ -101,10 +101,18 @@
                 :style="{ width: progressWidth }"
               ></div>
               <!-- Steps Indicator -->
+              <!-- <div v-for="index in totalSteps"
+                class="bg-muted-200 dark:bg-muted-700 relative z-20 flex size-4 items-center justify-center rounded-full"
+              >
+                <span
+                  :class="['scale-0', { 'scale-1': index <= currentStep }]"
+                  class="bg-primary-500 block size-2 rounded-full transition-transform duration-300"
+                ></span>
+              </div> -->
+              <!-- Steps Indicator -->
               <div
                 v-for="index in totalSteps"
-                
-                
+                :key="index"
                 class="bg-muted-200 dark:bg-muted-700 relative z-20 flex size-4 items-center justify-center rounded-full"
               >
                 <span
@@ -199,7 +207,6 @@
                             </BaseText>
                           </div>
                           <div class="ms-auto flex w-32 flex-col">
-                           
                             <BaseText size="xs" class="text-muted-400">
                               400 kr
                             </BaseText>
@@ -332,37 +339,43 @@
                       Choose a haircutter
                     </p>
                   </div>
-                
+
                   <!-- Error message -->
                   <span v-if="showHairdresserError" class="text-danger">
                     Please select any Haircutter
                   </span>
-                
+
                   <!-- Widget -->
                   <div class="col-span-12" v-for="user in users" :key="user.id">
                     <TairoTable rounded="sm">
                       <TairoTableRow>
                         <TairoTableCell>
-                          <div class="flex items-center ms-5 space-x-2 cursor-pointer" @click="selectHairdresser(user.id)">
-                            <label :for="user.id" class="flex items-center space-x-2 cursor-pointer">
-                            <BaseRadio
-                              v-model="hairdresser"
-                              name="hairdresser"
-                              :value="user.id"
-                              class="hidden"
-                              :id="user.id"
-                            />
-                            <div class="flex items-center space-x-2">
-                              <BaseAvatar
-                                src="https://tairo.cssninja.io/img/avatars/2.svg"
-                                size="sm"
+                          <div
+                            class="flex items-center ms-5 space-x-2 cursor-pointer"
+                            @click="selectHairdresser(user.id)"
+                          >
+                            <label
+                              :for="user.id"
+                              class="flex items-center space-x-2 cursor-pointer"
+                            >
+                              <BaseRadio
+                                v-model="hairdresser"
+                                name="hairdresser"
+                                :value="user.id"
+                                class="hidden"
+                                :id="user.id"
                               />
-                              <div class="leading-none">
-                                <h3 class="font-heading text-sm font-bold">
-                                  {{user.name ?? 'N/A'}}
-                                </h3>
+                              <div class="flex items-center space-x-2">
+                                <BaseAvatar
+                                  src="https://tairo.cssninja.io/img/avatars/2.svg"
+                                  size="sm"
+                                />
+                                <div class="leading-none">
+                                  <h3 class="font-heading text-sm font-bold">
+                                    {{ user.name ?? "N/A" }}
+                                  </h3>
+                                </div>
                               </div>
-                            </div>
                             </label>
                           </div>
                         </TairoTableCell>
@@ -370,8 +383,6 @@
                     </TairoTable>
                   </div>
                 </div>
-                
-                
 
                 <!-- select_date -->
                 <div v-show="currentStep === 3">
@@ -392,10 +403,10 @@
                     >Please select Date</span
                   >
                   <!-- Widget get date value from celender -->
-                  
+
                   <!--Grid item-->
 
-      <!-- <div>
+                  <!-- <div>
         <BaseCard class="p-4" rounded="lg">
           <Calendar v-model:attributes="calendarData.attributes" title-position="left" expanded borderless
             transparent trim-weeks class="max-w-full rounded-xl" />
@@ -403,22 +414,20 @@
         </BaseCard>
       </div> -->
 
-      <div>
-        <BaseCard class="p-4" rounded="lg">
-          <Calendar 
-            v-model:attributes="calendarData.attributes" 
-            title-position="left" 
-            expanded 
-            borderless
-            transparent 
-            trim-weeks 
-            class="max-w-full rounded-xl"
-            @dayclick="handleDateClick"
-          />
-        </BaseCard>
-      </div>
-
-
+                  <div>
+                    <BaseCard class="p-4" rounded="lg">
+                      <Calendar
+                        v-model:attributes="calendarData.attributes"
+                        title-position="left"
+                        expanded
+                        borderless
+                        transparent
+                        trim-weeks
+                        class="max-w-full rounded-xl"
+                        @dayclick="handleDateClick"
+                      />
+                    </BaseCard>
+                  </div>
                 </div>
 
                 <div v-show="currentStep === 4">
@@ -435,12 +444,12 @@
                       Choose a timeslot for your appointment
                     </p>
                   </div>
-                
+
                   <!-- Error message -->
                   <span v-if="showTimeError" class="text-danger">
                     Please select Time
                   </span>
-                
+
                   <!-- get time value -->
                   <div class="grid grid-cols-2 gap-5">
                     <!-- Left Section -->
@@ -461,7 +470,10 @@
                                 class="!h-4 !w-4"
                                 hidden
                               />
-                              <label for="time-slot-1" class="flex items-center space-x-2 cursor-pointer">
+                              <label
+                                for="time-slot-1"
+                                class="flex items-center space-x-2 cursor-pointer"
+                              >
                                 <BaseRadio
                                   v-model="time"
                                   name="time"
@@ -474,7 +486,7 @@
                           </TairoTableCell>
                         </TairoTableRow>
                       </TairoTable>
-                
+
                       <!-- Time Slot 2 -->
                       <TairoTable rounded="sm" class="!p-2">
                         <TairoTableRow>
@@ -489,7 +501,10 @@
                                 class="!h-4 !w-4"
                                 hidden
                               />
-                              <label for="time-slot-2" class="flex items-center space-x-2 cursor-pointer">
+                              <label
+                                for="time-slot-2"
+                                class="flex items-center space-x-2 cursor-pointer"
+                              >
                                 <BaseRadio
                                   v-model="time"
                                   name="time"
@@ -502,7 +517,7 @@
                           </TairoTableCell>
                         </TairoTableRow>
                       </TairoTable>
-                
+
                       <!-- Time Slot 3 -->
                       <TairoTable rounded="sm" class="!p-2">
                         <TairoTableRow>
@@ -517,7 +532,10 @@
                                 class="!h-4 !w-4"
                                 hidden
                               />
-                              <label for="time-slot-3" class="flex items-center space-x-2 cursor-pointer">
+                              <label
+                                for="time-slot-3"
+                                class="flex items-center space-x-2 cursor-pointer"
+                              >
                                 <BaseRadio
                                   v-model="time"
                                   name="time"
@@ -530,7 +548,7 @@
                           </TairoTableCell>
                         </TairoTableRow>
                       </TairoTable>
-                
+
                       <!-- Time Slot 4 -->
                       <TairoTable rounded="sm" class="!p-2">
                         <TairoTableRow>
@@ -545,7 +563,10 @@
                                 class="!h-4 !w-4"
                                 hidden
                               />
-                              <label for="time-slot-4" class="flex items-center space-x-2 cursor-pointer">
+                              <label
+                                for="time-slot-4"
+                                class="flex items-center space-x-2 cursor-pointer"
+                              >
                                 <BaseRadio
                                   v-model="time"
                                   name="time"
@@ -558,7 +579,7 @@
                           </TairoTableCell>
                         </TairoTableRow>
                       </TairoTable>
-                
+
                       <!-- Time Slot 5 -->
                       <TairoTable rounded="sm" class="!p-2">
                         <TairoTableRow>
@@ -573,7 +594,10 @@
                                 class="!h-4 !w-4"
                                 hidden
                               />
-                              <label for="time-slot-5" class="flex items-center space-x-2 cursor-pointer">
+                              <label
+                                for="time-slot-5"
+                                class="flex items-center space-x-2 cursor-pointer"
+                              >
                                 <BaseRadio
                                   v-model="time"
                                   name="time"
@@ -586,7 +610,7 @@
                           </TairoTableCell>
                         </TairoTableRow>
                       </TairoTable>
-                
+
                       <!-- Time Slot 6 -->
                       <TairoTable rounded="sm" class="!p-2">
                         <TairoTableRow>
@@ -601,7 +625,10 @@
                                 class="!h-4 !w-4"
                                 hidden
                               />
-                              <label for="time-slot-6" class="flex items-center space-x-2 cursor-pointer">
+                              <label
+                                for="time-slot-6"
+                                class="flex items-center space-x-2 cursor-pointer"
+                              >
                                 <BaseRadio
                                   v-model="time"
                                   name="time"
@@ -615,7 +642,7 @@
                         </TairoTableRow>
                       </TairoTable>
                     </div>
-                
+
                     <!-- Right Section -->
                     <div class="col-span-1">
                       <!-- Time Slot 7 -->
@@ -632,21 +659,24 @@
                                 class="!h-4 !w-4"
                                 hidden
                               />
-                              <label for="time-slot-7" class="flex items-center cursor-pointer">
+                              <label
+                                for="time-slot-7"
+                                class="flex items-center cursor-pointer"
+                              >
                                 <BaseRadio
                                   v-model="time"
                                   name="time"
                                   value="12:00"
                                   class="!h-4 !w-4"
                                 />
-                                <span class="text-sm ms-2">12:00</span> <!-- Adjusted margin on the text -->
+                                <span class="text-sm ms-2">12:00</span>
+                                <!-- Adjusted margin on the text -->
                               </label>
                             </div>
                           </TairoTableCell>
                         </TairoTableRow>
                       </TairoTable>
-                      
-                
+
                       <!-- Time Slot 8 -->
                       <TairoTable rounded="sm" class="!p-2">
                         <TairoTableRow>
@@ -661,7 +691,10 @@
                                 class="!h-4 !w-4"
                                 hidden
                               />
-                              <label for="time-slot-8" class="flex items-center space-x-2 cursor-pointer">
+                              <label
+                                for="time-slot-8"
+                                class="flex items-center space-x-2 cursor-pointer"
+                              >
                                 <BaseRadio
                                   v-model="time"
                                   name="time"
@@ -674,7 +707,7 @@
                           </TairoTableCell>
                         </TairoTableRow>
                       </TairoTable>
-                
+
                       <!-- Time Slot 9 -->
                       <TairoTable rounded="sm" class="!p-2">
                         <TairoTableRow>
@@ -689,7 +722,10 @@
                                 class="!h-4 !w-4"
                                 hidden
                               />
-                              <label for="time-slot-9" class="flex items-center space-x-2 cursor-pointer">
+                              <label
+                                for="time-slot-9"
+                                class="flex items-center space-x-2 cursor-pointer"
+                              >
                                 <BaseRadio
                                   v-model="time"
                                   name="time"
@@ -702,7 +738,7 @@
                           </TairoTableCell>
                         </TairoTableRow>
                       </TairoTable>
-                
+
                       <!-- Time Slot 10 -->
                       <TairoTable rounded="sm" class="!p-2">
                         <TairoTableRow>
@@ -717,7 +753,10 @@
                                 class="!h-4 !w-4"
                                 hidden
                               />
-                              <label for="time-slot-10" class="flex items-center space-x-2 cursor-pointer">
+                              <label
+                                for="time-slot-10"
+                                class="flex items-center space-x-2 cursor-pointer"
+                              >
                                 <BaseRadio
                                   v-model="time"
                                   name="time"
@@ -730,7 +769,7 @@
                           </TairoTableCell>
                         </TairoTableRow>
                       </TairoTable>
-                
+
                       <!-- Time Slot 11 -->
                       <TairoTable rounded="sm" class="!p-2">
                         <TairoTableRow>
@@ -745,7 +784,10 @@
                                 class="!h-4 !w-4"
                                 hidden
                               />
-                              <label for="time-slot-11" class="flex items-center space-x-2 cursor-pointer">
+                              <label
+                                for="time-slot-11"
+                                class="flex items-center space-x-2 cursor-pointer"
+                              >
                                 <BaseRadio
                                   v-model="time"
                                   name="time"
@@ -758,7 +800,7 @@
                           </TairoTableCell>
                         </TairoTableRow>
                       </TairoTable>
-                
+
                       <!-- Time Slot 12 -->
                       <TairoTable rounded="sm" class="!p-2">
                         <TairoTableRow>
@@ -773,7 +815,10 @@
                                 class="!h-4 !w-4"
                                 hidden
                               />
-                              <label for="time-slot-12" class="flex items-center space-x-2 cursor-pointer">
+                              <label
+                                for="time-slot-12"
+                                class="flex items-center space-x-2 cursor-pointer"
+                              >
                                 <BaseRadio
                                   v-model="time"
                                   name="time"
@@ -789,7 +834,6 @@
                     </div>
                   </div>
                 </div>
-                
 
                 <div v-show="currentStep === 5" class="space-y-4">
                   <div class="mb-4 space-y-1">
@@ -859,20 +903,20 @@
                       Summary
                     </h2>
                     <!-- show service -->
-                      <TairoTable rounded="sm" class="!p-2">
-                        <!-- Reduced padding in table -->
-                        <TairoTableRow>
-                          <TairoTableCell class="!py-2">
-                            <!-- Reduced padding in table cell -->
-                            <div class="flex flex-col space-y-2 ms-3">
-                              <!-- Use flex-col to stack items vertically -->
-                              <Field name="username" class="text-sm block">
-                                <b>Service: {{ service }}</b>
-                              </Field>
-                            </div>
-                          </TairoTableCell>
-                        </TairoTableRow>
-                      </TairoTable>
+                    <TairoTable rounded="sm" class="!p-2">
+                      <!-- Reduced padding in table -->
+                      <TairoTableRow>
+                        <TairoTableCell class="!py-2">
+                          <!-- Reduced padding in table cell -->
+                          <div class="flex flex-col space-y-2 ms-3">
+                            <!-- Use flex-col to stack items vertically -->
+                            <p name="username" class="text-sm text-dark block">
+                              <b>Service: {{ service }}</b>
+                            </p>
+                          </div>
+                        </TairoTableCell>
+                      </TairoTableRow>
+                    </TairoTable>
 
                     <!-- hairdresser Widget with image -->
                     <div class="col-span-12 mt-4">
@@ -890,7 +934,7 @@
                                 <div class="leading-none">
                                   <h3 class="font-heading text-sm font-bold">
                                     <!-- Bold text -->
-                                    {{ selected_hairdresser_name}}
+                                    {{ selected_hairdresser_name }}
                                     <!-- {{ selected_name }} -->
                                   </h3>
                                 </div>
@@ -908,11 +952,10 @@
                         <TairoTableCell class="!py-2">
                           <!-- Reduced padding in table cell -->
                           <div class="flex items-center space-x-2 ms-3">
-                            <!-- <BaseRadio v-model="selected" name="time" value="09:00" class="!h-4 ms-3 !w-4" /> -->
                             <!-- Reduced size of radio button -->
-                            <Field name="selected_time" class="text-sm">
-                             {{selected_date}}, {{ selected_time }}
-                            </Field>
+                            <p name="selected_time" class="text-sm text-dark">
+                              {{ selected_date }}, {{ selected_time }}
+                            </p>
                             <!-- Adjusted text size -->
                           </div>
                         </TairoTableCell>
@@ -927,15 +970,15 @@
                           <!-- Reduced padding in table cell -->
                           <div class="flex flex-col space-y-2 ms-3">
                             <!-- Use flex-col to stack items vertically -->
-                            <Field name="username" class="text-sm block">
+                            <p name="username" class="text-sm block">
                               <b>Name: {{ selected_name }}</b>
-                            </Field>
-                            <Field name="email" class="text-sm block">
+                            </p>
+                            <p name="email" class="text-sm block">
                               <b>Email: {{ selected_email }}</b>
-                            </Field>
-                            <Field name="phone" class="text-sm block">
+                            </p>
+                            <p name="phone" class="text-sm fw-bold block">
                               <b>Phone: {{ selected_phone }}</b>
-                            </Field>
+                            </p>
                           </div>
                         </TairoTableCell>
                       </TairoTableRow>
@@ -1061,26 +1104,25 @@
       </div>
     </div>
     <!-- Accordion -->
-
-</div>
+  </div>
 </template>
 
 <script setup>
 import { Calendar } from "v-calendar";
 import { ref } from "vue";
 import { computed } from "vue";
-const authStore = useAuthStore()
+const authStore = useAuthStore();
+import { useAuthStore } from "~/stores/auth";
+const { token } = useAuthStore();
 
 import "v-calendar/dist/style.css";
 import "~/assets/css/vcalendar.css";
 import { useHead } from "#app";
 import { definePageMeta } from "#imports"; // Ensure this import is correct for Nuxt 3
 
-
 // define api_route
-const config = useRuntimeConfig()
-const apiUrl = config.public.apiUrl
-
+const config = useRuntimeConfig();
+const apiUrl = config.public.apiUrl;
 
 // Set page meta and head elements
 useHead({
@@ -1110,7 +1152,6 @@ const isNavbarOpen = ref(false);
 function toggleNavbar() {
   isNavbarOpen.value = !isNavbarOpen.value;
 }
-
 
 // State to track which accordion item is open
 const activeIndex = ref(null);
@@ -1148,7 +1189,7 @@ const labels = [
 ];
 // Computed property to get the selected hairdresser's name
 const selected_hairdresser_name = computed(() => {
-  const selected = users.value.find(user => user.id === hairdresser.value);
+  const selected = users.value.find((user) => user.id === hairdresser.value);
   return selected ? selected.name : "N/A";
 });
 
@@ -1192,7 +1233,10 @@ function validateStep() {
     case 5:
       // Check if all required fields are filled
       if (
-        !first_name.value
+        !first_name.value ||
+        !last_name.value ||
+        !email.value ||
+        !phone.value
       ) {
         showContractError.value = true;
         return false;
@@ -1216,17 +1260,15 @@ function handleContinue() {
   }
 }
 
-
 // =============== hairdressers ============================
 const selectedEvent = computed(() => {
   return (
     calendarEvents.value.find(
-      event => event?.customData?.id === selectedEventId.value,
-    )?.customData
-    || pendingEvents.value.find(event => event.id === selectedEventId.value)
-  )
-})
-
+      (event) => event?.customData?.id === selectedEventId.value
+    )?.customData ||
+    pendingEvents.value.find((event) => event.id === selectedEventId.value)
+  );
+});
 
 // ===================================== ref =====================================
 const service = ref("");
@@ -1242,22 +1284,23 @@ const totalSteps = 6;
 
 // Use computed properties to reflect changes reactively
 const selected_time = computed(() => time.value || "");
-const selected_name = computed(() => first_name.value + ' ' + last_name.value || "");
+const selected_name = computed(
+  () => first_name.value + " " + last_name.value || ""
+);
 const selected_email = computed(() => email.value || "");
 const selected_phone = computed(() => phone.value || "");
-
 
 // Initialize calendarData with default values
 const calendarData = ref({
   attributes: [
     {
-      key: 'today',
+      key: "today",
       highlight: true,
       order: 0,
       dates: [new Date()],
     },
   ],
-  titlePosition: 'left',
+  titlePosition: "left",
   expanded: true,
   borderless: true,
   transparent: true,
@@ -1288,14 +1331,16 @@ function handleSubmit() {
   fetch(`${apiUrl}/api/v1/booking`, {
     method: "POST",
     headers: {
-      "Content-Type": "application/json",
+      Accept: "application/json",
+      Authorization: `Bearer ${token}`, // Use backticks for template literals
+      "Content-Type": "application/json", // Ensure this is included
     },
     body: JSON.stringify(payload),
   })
     .then((response) => response.json())
     .then((response) => {
-      if (response.status !== 'success') {
-       // Extract and display each error message separately
+      if (response.status !== "success") {
+        // Extract and display each error message separately
         const errors = response.data;
         for (const messages of Object.values(errors)) {
           for (const message of messages) {
@@ -1340,8 +1385,6 @@ function handleSubmit() {
       });
     });
 }
-
-
 </script>
 
 <style scoped>

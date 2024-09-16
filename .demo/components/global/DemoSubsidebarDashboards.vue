@@ -228,10 +228,6 @@ const navigation = [
     to: '/dashboards',
   },
   {
-    name: 'Bookings',
-    to: '/dashboards/calendar',
-  },
-  {
     name: 'Hairdresser',
     to: '/dashboards/hairdresser',
   },
@@ -242,6 +238,10 @@ const navigation = [
   {
     name: 'Clients',
     to: '/dashboards/clients',
+  },
+  {
+    name: 'Bookings',
+    to: '/dashboards/calendar',
   },
   {
     divider: true,

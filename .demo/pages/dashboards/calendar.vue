@@ -10,13 +10,13 @@ import {
   addDays,
   addMinutes,
   roundToNearestMinutes,
-} from 'date-fns'
-import { Calendar } from 'v-calendar'
-import { Container, Draggable } from 'vue3-smooth-dnd'
+} from "date-fns";
+import { Calendar } from "v-calendar";
+import { Container, Draggable } from "vue3-smooth-dnd";
 
-import 'v-calendar/dist/style.css'
-import '~/assets/css/vcalendar-weekly.css'
-import '~/assets/css/vcalendar.css'
+import "v-calendar/dist/style.css";
+import "~/assets/css/vcalendar-weekly.css";
+import "~/assets/css/vcalendar.css";
 
 import {
   type VCalendarAttribute,
@@ -34,23 +34,23 @@ import {
   useDragEventPending,
   useCreateEvent,
   useViewPan,
-} from '~/utils/bundles/calendar'
+} from "~/utils/bundles/calendar";
 
 definePageMeta({
-  title: 'Calendar',
-  layout: 'empty',
+  title: "Calendar",
+  layout: "empty",
   preview: {
-    title: 'Calendar app',
-    description: 'For email and messaging apps',
-    categories: ['dashboards'],
-    src: '/img/screens/dashboard-calendar.png',
-    srcDark: '/img/screens/dashboard-calendar-dark.png',
+    title: "Calendar app",
+    description: "For email and messaging apps",
+    categories: ["dashboards"],
+    src: "/img/screens/dashboard-calendar.png",
+    srcDark: "/img/screens/dashboard-calendar-dark.png",
     order: 25,
   },
-})
+});
 
-const scrollCalendarRef = ref<HTMLElement>()
-const showSettings = ref(false)
+const scrollCalendarRef = ref<HTMLElement>();
+const showSettings = ref(false);
 const settings = reactive<CalendarSettings>({
   hideWeekends: false,
   hourOpen: 8,
@@ -59,16 +59,16 @@ const settings = reactive<CalendarSettings>({
   hourHeight: 160,
   dayOffsetY: 0,
   weekStartsOn: 0,
-})
+});
 function getChildPayload(index: number) {
-  return pendingEvents.value?.[index - 1]
+  return pendingEvents.value?.[index - 1];
 }
 
-const { fromDate, toDate, weekdays, onPageChange } = useDateRange(settings)
+const { fromDate, toDate, weekdays, onPageChange } = useDateRange(settings);
 const { calendarEvents, pendingEvents } = useCalendarEvents({
   fromDate,
   toDate,
-})
+});
 
 const {
   isHeightDragging,
@@ -81,37 +81,37 @@ const {
   // on drag end
   async (event) => {
     // update event
-  },
-)
+  }
+);
 
 const { onCalendarClick, clearNew, hasNew } = useCreateEvent(
   settings,
   calendarEvents,
   // new event template
-  date => ({
+  (date) => ({
     startDate: date,
     endDate: addMinutes(date, 30),
     duration: 30,
-    category: 'none',
-    title: '',
+    category: "none",
+    title: "",
     participants: [],
   }),
   // can create new event
   () => {
     return !(
-      isHeightDragging.value
-      || isPositionDragging.value
-      || isViewPaning.value
-    )
+      isHeightDragging.value ||
+      isPositionDragging.value ||
+      isViewPaning.value
+    );
   },
   // on create
   async (event) => {
-    calendarEvents.value.push(event)
-    onSelectEvent(event.customData)
-  },
-)
+    calendarEvents.value.push(event);
+    onSelectEvent(event.customData);
+  }
+);
 
-const selectedEventId = ref<string>()
+const selectedEventId = ref<string>();
 // const selectedEvent = computed(() => {
 //   return (
 //     calendarEvents.value.find(
@@ -121,134 +121,141 @@ const selectedEventId = ref<string>()
 //   )
 // })
 function onSelectEvent(event: CalendarEvent) {
-  if (event.id !== 'new' && hasNew.value) {
-    clearNew()
+  if (event.id !== "new" && hasNew.value) {
+    clearNew();
   }
 
-  selectedEventId.value = event.id
+  selectedEventId.value = event.id;
 }
 
-const { now, showNow } = useNowMarker(scrollCalendarRef, settings)
+const { now, showNow } = useNowMarker(scrollCalendarRef, settings);
 const { isViewPaning, isViewMoved } = useViewPan(scrollCalendarRef, () => {
-  return !(isHeightDragging.value || isPositionDragging.value)
-})
+  return !(isHeightDragging.value || isPositionDragging.value);
+});
 
 const { isPendingEventDragging, onPendingEventDragStart } = useDragEventPending(
   settings,
   calendarEvents,
   // on drag end
   (event) => {
-    onSelectEvent(event.customData)
-    calendarEvents.value.push(event)
+    onSelectEvent(event.customData);
+    calendarEvents.value.push(event);
 
     const idx = pendingEvents.value.findIndex(
-      item => item.id === event.customData.id,
-    )
+      (item) => item.id === event.customData.id
+    );
     if (idx === -1) {
-      return
+      return;
     }
-    pendingEvents.value.splice(idx, 1)
-  },
-)
+    pendingEvents.value.splice(idx, 1);
+  }
+);
 
 const isDragging = computed(
   () =>
-    isPendingEventDragging.value
-    || isPositionDragging.value
-    || isHeightDragging.value,
-)
+    isPendingEventDragging.value ||
+    isPositionDragging.value ||
+    isHeightDragging.value
+);
 
-function scrollCalendarToTop(top = 0, behavior: ScrollBehavior = 'smooth') {
+function scrollCalendarToTop(top = 0, behavior: ScrollBehavior = "smooth") {
   if (!scrollCalendarRef.value) {
-    return
+    return;
   }
 
   scrollCalendarRef.value.scrollTo({
     top,
     behavior,
-  })
+  });
 }
 
 function updateHeight(height = 160) {
   if (!scrollCalendarRef.value) {
-    return
+    return;
   }
 
-  const top = scrollCalendarRef.value.scrollTop
-  const initialDate = topToDate(settings, top)
+  const top = scrollCalendarRef.value.scrollTop;
+  const initialDate = topToDate(settings, top);
 
-  settings.hourHeight = height
+  settings.hourHeight = height;
 
   if (!initialDate) {
-    return
+    return;
   }
 
   nextTick(() => {
-    scrollCalendarToTop(dateToTop(settings, initialDate), 'instant')
-  })
+    scrollCalendarToTop(dateToTop(settings, initialDate), "instant");
+  });
 }
 const selectedEventFeatures = computed({
   get() {
     return selectedEvent.value?.features
       ? Object.keys(selectedEvent.value?.features)
-      : []
+      : [];
   },
   set(values: string[]) {
     if (!selectedEvent.value) {
-      return
+      return;
     }
 
-    selectedEvent.value.features = values.reduce(
-      (acc, value) => {
-        acc[value] = true
-        return acc
-      },
-      {} as Record<string, boolean>,
-    )
+    selectedEvent.value.features = values.reduce((acc, value) => {
+      acc[value] = true;
+      return acc;
+    }, {} as Record<string, boolean>);
   },
-})
+});
 
-// my coden 
+// my coden
 // Function to send booking data to the backend
-import { ref, computed, reactive } from 'vue';
+import { ref, computed, reactive } from "vue";
+import { useAuthStore } from '~/stores/auth'
+const { token } = useAuthStore()
 
 // define api_route
-const config = useRuntimeConfig()
-const apiUrl = config.public.apiUrl
+const config = useRuntimeConfig();
+const apiUrl = config.public.apiUrl;
 
 const categories = [
-  { title: 'Simple haircut for men', value: 'Simple haircut for men' },
-  { title: 'Simple haircut for men + wash', value: 'Simple haircut for men + wash' },
-  { title: 'Simple haircut for women', value: 'Simple haircut for women' },
-  { title: 'Simple haircut for women + wash', value: 'Simple haircut for women + wash' },
+  { title: "Simple haircut for men", value: "Simple haircut for men" },
+  {
+    title: "Simple haircut for men + wash",
+    value: "Simple haircut for men + wash",
+  },
+  { title: "Simple haircut for women", value: "Simple haircut for women" },
+  {
+    title: "Simple haircut for women + wash",
+    value: "Simple haircut for women + wash",
+  },
 ];
 
-const hairdresser = ref([])
+const hairdresser = ref([]);
+const hairdresser_filter = ref([]);
+const offDayBooking = ref({
+  date: null,
+  hairdresser: null,
+});
 
 const selectedEvent = ref({
-  firstname: '',
+  firstname: "",
   lastname: null,
-  email: null, 
-  phone: null, 
+  email: null,
+  phone: null,
   service: null,
-  hairdresser	: null,
-  date	: null,
-  time	: null,
+  hairdresser: null,
+  date: null,
+  time: null,
   participants: [],
   // Other fields...
 });
-
-
-const toaster = useToaster()
-
-
+const toaster = useToaster();
 async function sendBookingData(event: CalendarEvent) {
   try {
-    const response = await fetch('http://localhost:8000/api/v1/admin-booking', {
-      method: 'POST',
+    const response = await fetch("http://localhost:8000/api/v1/admin-booking", {
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
+        Accept: "application/json",
+        Authorization: `Bearer ${token}`, // Use backticks for template literals
+        "Content-Type": "application/json", // Ensure this is included
       },
       body: JSON.stringify({
         firstname: event.firstname,
@@ -262,25 +269,108 @@ async function sendBookingData(event: CalendarEvent) {
       }),
     });
 
+    const data = await response.json();
+
+   
+      // Display server validation errors
+      if (data.response === false && data.message === "Validation Error.") {
+        // Get the first validation error message
+        const firstErrorKey = Object.keys(data.data)[0];
+        const firstErrorMessage = data.data[firstErrorKey][0];
+        
+        toaster.clearAll();
+        toaster.show({
+          title: "Validation Error",
+          message: `Error: ${firstErrorMessage}`,
+          color: "danger",
+          icon: "ph:x",
+          class: "end-2 top-2",
+          closable: true,
+        });
+      } else if(data.response === false && data.message == "off day"){
+        // Get the first validation error message
+        toaster.show({
+          title: "Validation Error",
+          message: `The hairdresser has an off day on ${event.date}.`,
+          color: "danger",
+          icon: "ph:x",
+          class: "end-2 top-2",
+          closable: true,
+        });
+      
+      } else {
+      // Success
+      console.log("Booking data sent successfully:", data);
+      toaster.clearAll();
+      toaster.show({
+        title: "Success",
+        message: "Hairdresser saved successfully!",
+        color: "success",
+        icon: "ph:check",
+        class: "end-2 top-2",
+        closable: true,
+      });
+    }
+  } catch (error) {
+    console.error("Error sending booking data:", error);
+    toaster.clearAll();
+    toaster.show({
+      title: "Error",
+      message: `An error occurred: ${error.message}`,
+      color: "danger",
+      icon: "ph:x",
+      class: "end-2 top-2",
+      closable: true,
+    });
+  }
+}
+
+async function offSDayForm() {
+  try {
+    const response = await fetch("http://localhost:8000/api/v1/booking-off", {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        Authorization: `Bearer ${token}`, // Use backticks for template literals
+        "Content-Type": "application/json", // Ensure this is included
+      },
+      body: JSON.stringify({
+        hairdresser_id: offDayBooking.value.hairdresser,
+        date: offDayBooking.value.date,
+      }),
+    });
+
     if (!response.ok) {
       throw new Error(`HTTP error! Status: ${response.status}`);
     }
 
     const data = await response.json();
-    console.log('Booking data sent successfully:', data);
-    
-    toaster.clearAll()
+    console.log("Off day booking data sent successfully:", data);
+    if (data.response) {
+      toaster.clearAll();
       toaster.show({
-        title: 'Success',
-        message: `Hairdresser Save successfully!`,
-        color: 'success',
-        icon: 'ph:check',
-        class: 'end-2 top-2',
+        title: "Success",
+        message: "Off day Hairdresser saved successfully!",
+        color: "success",
+        icon: "ph:check",
+        class: "end-2 top-2",
         closable: true,
-      })
-
+      });
+    } else {
+      // Extract and display each error message separately
+      toaster.clearAll();
+      toaster.show({
+        title: "error",
+        message: "Please select hairdresser and date!",
+        color: "danger",
+        icon: "ph:cross",
+        class: "end-2 top-2",
+        closable: true,
+      });  
+      
+    }
   } catch (error) {
-    console.error('Error sending booking data:', error);
+    console.error("Error sending booking data:", error);
   }
 }
 
@@ -296,18 +386,26 @@ const serviceDescriptions = {
   "1": "Simple haircut for men",
   "2": "Simple haircut for men + Wash",
   "3": "Simple haircut for woman",
-  "4": "Simple haircut for woman + Wash"
+  "4": "Simple haircut for woman + Wash",
 };
 
 // Define a ref to hold booking data
 const bookings = ref([]);
-  // get haridressers
-  const users = ref([]);
+// get haridressers
+const users = ref([]);
 
 // Fetch data on component mount
 onMounted(async () => {
   try {
-    const response = await fetch('http://localhost:8000/api/v1/get-all-bookings');
+    const response = await fetch("http://localhost:8000/api/v1/get-all-bookings",
+    { method: "GET",
+      headers: {
+        Accept: "application/json",
+        Authorization: `Bearer ${token}`, // Use backticks for template literals
+        "Content-Type": "application/json", // Ensure this is included
+
+      }
+    });
     const data = await response.json();
     // Assuming the bookings array directly represents pending events
     bookings.value = data.booking;
@@ -315,34 +413,44 @@ onMounted(async () => {
     pendingEvents.value = data.booking; // Example filter
     console.log(pendingEvents.value);
   } catch (error) {
-    console.error('Error fetching bookings:', error);
+    console.error("Error fetching bookings:", error);
   }
 
+  // Fetch data on component mount
+  try {
+    const response = await fetch("http://localhost:8000/api/v1/get-hairdresser",
+      { method: "GET",
+      headers: {
+        Accept: "application/json",
+        Authorization: `Bearer ${token}`, // Use backticks for template literals
+        "Content-Type": "application/json", // Ensure this is included
 
-    // Fetch data on component mount
-      try {
-        const response = await fetch("http://localhost:8000/api/v1/get-hairdresser");
-        const data = await response.json();
-        users.value = data.users;
-        
-        // Transform the data to match the expected format
-        hairdresser.value = data.users.map(user => ({
-              name: user.name,
-              value: user.id
-            }));
-
-          console.log('hairdresser', hairdresser.value);
-
-
-        console.log('users.value',users.value);
-      } catch (error) {
-        console.error("Error fetching users:", error);
       }
-    
+    }
+    );
+    const data = await response.json();
+    users.value = data.users;
 
+    // Transform the data to match the expected format
+    hairdresser.value = data.users.map((user:any) => ({
+      name: user.name,
+      value: user.id,
+    }));
 
+    // Transform the data to match the expected format and add the "all" option
+    hairdresser.value = [
+      { name: "all", value: 0 }, // Add this line to include the "all" option
+      ...data.users.map((user:any) => ({
+        name: user.name,
+        value: user.id,
+      })),
+    ];
+
+    console.log("users.value", users.value);
+  } catch (error) {
+    console.error("Error fetching users:", error);
+  }
 });
-
 </script>
 
 <template>
@@ -383,7 +491,6 @@ onMounted(async () => {
           </div>
         </NuxtLink>
 
-
         <div class="mt-auto flex flex-col items-center">
           <div class="relative flex size-16 items-center justify-center">
             <DemoAccountMenu />
@@ -407,9 +514,7 @@ onMounted(async () => {
           class="dark:bg-muted-900 sticky top-0 z-20 flex bg-white"
           @click="() => scrollCalendarToTop()"
         >
-          <div
-            class="border-muted-200 dark:border-muted-800 w-10 border-b"
-          />
+          <div class="border-muted-200 dark:border-muted-800 w-10 border-b" />
           <div
             class="border-muted-200 dark:border-muted-800 grid grow border-b"
             :class="[settings.hideWeekends ? 'grid-cols-5' : 'grid-cols-7']"
@@ -420,7 +525,7 @@ onMounted(async () => {
               class="day-label text-muted-900 dark:text-muted-400 pointer-events-none flex h-[52px] items-center gap-2 p-3 text-sm"
               :class="[isPast(endOfDay(day)) ? 'opacity-50' : '']"
             >
-              <span>{{ capitalize(format(day, 'EEEE d')) }}</span>
+              <span>{{ capitalize(format(day, "EEEE d")) }}</span>
               <span v-if="isToday(day)" class="text-primary-500 mb-[2px]">
                 <Icon name="ph:calendar-blank-duotone" />
               </span>
@@ -577,14 +682,14 @@ onMounted(async () => {
                         top: `${dateToTop(
                           settings,
                           event.customData.startDate,
-                          day.date,
+                          day.date
                         )}px`,
                         height: `${
                           datesToHeight(
                             settings,
                             event.customData.startDate,
                             event.customData.endDate,
-                            day.date,
+                            day.date
                           ) + 4
                         }px`,
                       }"
@@ -602,13 +707,13 @@ onMounted(async () => {
                         top: `${dateToTop(
                           settings,
                           event.customData.startDate,
-                          day.date,
+                          day.date
                         )}px`,
                         height: `${datesToHeight(
                           settings,
                           event.customData.startDate,
                           event.customData.endDate,
-                          day.date,
+                          day.date
                         )}px`,
                       }"
                       @click.stop="() => onSelectEvent(event.customData)"
@@ -625,13 +730,13 @@ onMounted(async () => {
                           dateToTop(
                             settings,
                             event.customData.startDate,
-                            day.date,
+                            day.date
                           ) +
                           datesToHeight(
                             settings,
                             event.customData.startDate,
                             event.customData.endDate,
-                            day.date,
+                            day.date
                           )
                         }px`,
                       }"
@@ -705,27 +810,13 @@ onMounted(async () => {
                 wrapper: 'col-span-2',
               }"
             >
-              <option :value="0">
-                Sunday
-              </option>
-              <option :value="1">
-                Monday
-              </option>
-              <option :value="2">
-                Tuesday
-              </option>
-              <option :value="3">
-                Wednesday
-              </option>
-              <option :value="4">
-                Thursday
-              </option>
-              <option :value="5">
-                Friday
-              </option>
-              <option :value="6">
-                Saturday
-              </option>
+              <option :value="0">Sunday</option>
+              <option :value="1">Monday</option>
+              <option :value="2">Tuesday</option>
+              <option :value="3">Wednesday</option>
+              <option :value="4">Thursday</option>
+              <option :value="5">Friday</option>
+              <option :value="6">Saturday</option>
             </BaseSelect>
             <BaseButtonGroup>
               <BaseButtonAction
@@ -798,165 +889,102 @@ onMounted(async () => {
 
             <div class="flex flex-col gap-2">
               <form @submit.prevent="handleSubmit">
-              <div class="flex flex-col gap-2">
-              
-                <BaseInput
-                v-model.trim="selectedEvent.title"
-                v-focus
-                label="Title"
-              />
-        
-                <BaseInput
-                  v-model.trim="selectedEvent.firstname"
-                  v-focus
-                  label="First name"
-                />
-        
-            
-        
-        
-                <BaseInput
-                  v-model.trim="selectedEvent.lastname"
-                  v-focus
-                  label="Last name"
-                />
-        
-                <BaseInput
-                  v-model.trim="selectedEvent.email"
-                  v-focus
-                  type="email"
-                  label="Eamil name"
-                />
-                <BaseInput
-                  v-model.trim="selectedEvent.phone"
-                  v-focus
-                  type="phone"
-                  label="phone"
-                />
-        
-                <BaseInput
-                v-model.trim="selectedEvent.date"
-                v-focus
-                type="date"
-                label="date"
-              />
-        
-              <BaseInput
-              v-model.trim="selectedEvent.time"
-              v-focus
-              type="time"
-              label="time"
-            />
-              
-        
-                <!-- Category Dropdown -->
-            <BaseListbox
-            v-model.prop="selectedEvent.service"
-            label="Service"
-            :properties="{ value: 'value', label: 'title' }"
-            :items="categories"
-          />
-        
-        
-       <!-- Assignee Dropdown -->
-         
+                <div class="flex flex-col gap-2">
+                  <BaseInput
+                    v-model.trim="selectedEvent.title"
+                    v-focus
+                    label="Title"
+                  />
 
+                  <BaseInput
+                    v-model.trim="selectedEvent.firstname"
+                    v-focus
+                    label="First name"
+                  />
 
-      
+                  <BaseInput
+                    v-model.trim="selectedEvent.lastname"
+                    v-focus
+                    label="Last name"
+                  />
 
-          <BaseListbox
-          v-model.prop="selectedEvent.hairdresser"
-          label="Hair Dresser"
-          :properties="{ value: 'value', label: 'name' }"
-          :items="hairdresser"
-        />
-        
-         <!-- Client Dropdown -->
-         <!-- <BaseListbox
-         v-model.prop="selectedEvent.client"
-         label="Client"
-         :properties="{ value: 'value', label: 'name' }"
-         :items="clients"
-        /> -->
-        
-               
-        
-                <div class="relative z-[5] grid grid-cols-4 gap-2 pt-4">
-                  <div data-nui-tooltip="Record">
-                    <BaseCheckboxHeadless
-                      v-model="selectedEventFeatures"
-                      value="record"
-                      name="features"
-                    >
-                      <BaseCard
-                        rounded="lg"
-                        class="text-muted-300 peer-checked:border-primary-500 peer-checked:text-primary-500 p-4"
-                      >
-                        <div class="flex flex-col items-center gap-1">
-                          <Icon name="ph:monitor-play-duotone" class="size-5" />
-                        </div>
-                      </BaseCard>
-                    </BaseCheckboxHeadless>
-                  </div>
-                  <div data-nui-tooltip="Document included">
-                    <BaseCheckboxHeadless
-                      v-model="selectedEventFeatures"
-                      value="drive"
-                      name="features"
-                    >
-                      <BaseCard
-                        rounded="lg"
-                        class="text-muted-300 peer-checked:border-primary-500 peer-checked:text-primary-500 p-4"
-                      >
-                        <div class="flex flex-col items-center gap-1">
-                          <Icon name="ph:note-duotone" class="size-5" />
-                        </div>
-                      </BaseCard>
-                    </BaseCheckboxHeadless>
-                  </div>
-                  <div data-nui-tooltip="External Users">
-                    <BaseCheckboxHeadless
-                      v-model="selectedEventFeatures"
-                      value="external"
-                      name="features"
-                    >
-                      <BaseCard
-                        rounded="lg"
-                        class="text-muted-300 peer-checked:border-primary-500 peer-checked:text-primary-500 p-4"
-                      >
-                        <div class="flex flex-col items-center gap-1">
-                          <Icon name="ph:lock-open-duotone" class="size-5" />
-                        </div>
-                      </BaseCard>
-                    </BaseCheckboxHeadless>
-                  </div>
-                  <div data-nui-tooltip="Comment allowed">
-                    <BaseCheckboxHeadless
-                      v-model="selectedEventFeatures"
-                      value="conversation"
-                      name="features"
-                    >
-                      <BaseCard
-                        rounded="lg"
-                        class="text-muted-300 peer-checked:border-primary-500 peer-checked:text-primary-500 p-4"
-                      >
-                        <div class="flex flex-col items-center gap-1">
-                          <Icon name="ph:chats-circle-duotone" class="size-5" />
-                        </div>
-                      </BaseCard>
-                    </BaseCheckboxHeadless>
-                  </div>
+                  <BaseInput
+                    v-model.trim="selectedEvent.email"
+                    v-focus
+                    type="email"
+                    label="Eamil name"
+                  />
+                  <BaseInput
+                    v-model.trim="selectedEvent.phone"
+                    v-focus
+                    type="phone"
+                    label="phone"
+                  />
+
+                  <BaseInput
+                    v-model.trim="selectedEvent.date"
+                    v-focus
+                    type="date"
+                    label="date"
+                  />
+
+                  <BaseInput
+                    v-model.trim="selectedEvent.time"
+                    v-focus
+                    type="time"
+                    label="time"
+                  />
+
+                  <!-- Category Dropdown -->
+                  <BaseListbox
+                    v-model.prop="selectedEvent.service"
+                    label="Service"
+                    :properties="{ value: 'value', label: 'title' }"
+                    :items="categories"
+                  />
+
+                  <!-- Assignee Dropdown -->
+
+                  <BaseListbox
+                    v-model.prop="selectedEvent.hairdresser"
+                    label="Hair Dresser"
+                    :properties="{ value: 'value', label: 'name' }"
+                    :items="hairdresser"
+                  />
+
+                  <!-- Submit Button -->
+                  <BaseButton type="submit" color="primary" class="mt-4">
+                    Submit
+                  </BaseButton>
                 </div>
-        
-                <!-- Submit Button -->
-                <BaseButton type="submit" color="primary" class="mt-4">
-                  Submit
-                </BaseButton>
-              </div>
-            </form>
+              </form>
 
-             
-              
+              <hr />
+              <span class="mt-5">Off Day</span>
+              <form @submit.prevent="offSDayForm">
+                <div class="flex flex-col gap-2">
+                  <BaseListbox
+                    v-model="offDayBooking.hairdresser"
+                    label="Hair Dresser"
+                    :properties="{ value: 'value', label: 'name' }"
+                    :items="hairdresser"
+                  />
+
+                  <BaseInput
+                    v-model.trim="offDayBooking.date"
+                    v-focus
+                    type="date"
+                    label="Date"
+                  />
+
+                  <!-- Submit Button -->
+                  <BaseButton type="submit" color="primary" class="mt-4">
+                    Submit
+                  </BaseButton>
+                </div>
+              </form>
+
+              <!-- off day -->
             </div>
           </div>
           <div
@@ -996,71 +1024,72 @@ onMounted(async () => {
                 }
               "
             >
-
-            <!-- pending event -->
-            <template>
-              <div v-if="pendingEvents.length">
-                <BaseHeading
-                  size="sm"
-                  weight="medium"
-                  lead="snug"
-                  class="text-muted-400 dark:text-muted-500 mb-4 uppercase"
-                >
-                  Pending events
-                </BaseHeading>
-                <Draggable
-                  v-for="pendingEvent in pendingEvents"
-                  :key="pendingEvent.id"
-                >
-                  <DemoCalendarEventPending
-                    :event="pendingEvent"
-                    role="button"
-                    @click="() => onSelectEvent(pendingEvent)"
-                  />
-                </Draggable>
-              </div>
-              <div v-else>
-                <!-- empty state -->
-                <div class="p-4">
-                  <img
-                    class="mx-auto block max-w-[200px] dark:hidden"
-                    src="/img/illustrations/placeholders/flat/placeholder-projects.svg"
-                    alt=""
-                  />
-                  <img
-                    class="mx-auto hidden max-w-[200px] dark:block"
-                    src="/img/illustrations/placeholders/flat/placeholder-projects-dark.svg"
-                    alt=""
-                  />
-                  <div class="mt-4 text-center">
-                    <BaseHeading
-                      as="h4"
-                      size="lg"
-                      weight="light"
-                      class="mb-1"
-                    >
-                      <span>No pending events</span>
-                    </BaseHeading>
-                    <BaseParagraph
-                      size="xs"
-                      lead="tight"
-                      class="text-muted-400 mx-auto max-w-[200px] !font-sans"
-                    >
-                      <span>You've planned all your events for this week.</span>
-                    </BaseParagraph>
-                    <NuxtLink
-                      href="#"
-                      class="text-primary-500 nui-focus dark:text-sunny pointer-events-auto mx-auto mt-2 flex items-center justify-center gap-1 font-sans text-xs underline-offset-4 hover:underline"
-                    >
-                      <Icon name="lucide:plus" class="size-3" />
-                      <span>New event</span>
-                    </NuxtLink>
+              <!-- pending event -->
+              <template>
+                <div v-if="pendingEvents.length">
+                  <BaseHeading
+                    size="sm"
+                    weight="medium"
+                    lead="snug"
+                    class="text-muted-400 dark:text-muted-500 mb-4 uppercase"
+                  >
+                    Pending events
+                  </BaseHeading>
+                  <Draggable
+                    v-for="pendingEvent in pendingEvents"
+                    :key="pendingEvent.id"
+                  >
+                    <DemoCalendarEventPending
+                      :event="pendingEvent"
+                      role="button"
+                      @click="() => onSelectEvent(pendingEvent)"
+                    />
+                  </Draggable>
+                </div>
+                <div v-else>
+                  <!-- empty state -->
+                  <div class="p-4">
+                    <img
+                      class="mx-auto block max-w-[200px] dark:hidden"
+                      src="/img/illustrations/placeholders/flat/placeholder-projects.svg"
+                      alt=""
+                    />
+                    <img
+                      class="mx-auto hidden max-w-[200px] dark:block"
+                      src="/img/illustrations/placeholders/flat/placeholder-projects-dark.svg"
+                      alt=""
+                    />
+                    <div class="mt-4 text-center">
+                      <BaseHeading
+                        as="h4"
+                        size="lg"
+                        weight="light"
+                        class="mb-1"
+                      >
+                        <span>No pending events</span>
+                      </BaseHeading>
+                      <BaseParagraph
+                        size="xs"
+                        lead="tight"
+                        class="text-muted-400 mx-auto max-w-[200px] !font-sans"
+                      >
+                        <span
+                          >You've planned all your events for this week.</span
+                        >
+                      </BaseParagraph>
+                      <NuxtLink
+                        href="#"
+                        class="text-primary-500 nui-focus dark:text-sunny pointer-events-auto mx-auto mt-2 flex items-center justify-center gap-1 font-sans text-xs underline-offset-4 hover:underline"
+                      >
+                        <Icon name="lucide:plus" class="size-3" />
+                        <span>New event</span>
+                      </NuxtLink>
+                    </div>
                   </div>
                 </div>
-              </div>
-            </template>
+              </template>
 
-            <!-- pending end -->
+              <!-- pending end -->
             </Container>
           </div>
         </Transition>

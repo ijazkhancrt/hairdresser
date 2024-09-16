@@ -1,24 +1,24 @@
 <script setup lang="ts">
 definePageMeta({
-  title: 'Activity',
+  title: "Activity",
   preview: {
-    title: 'Personal dashboard v1',
-    description: 'For personal usage and reports',
-    categories: ['dashboards'],
-    src: '/img/screens/dashboards-personal-1.png',
-    srcDark: '/img/screens/dashboards-personal-1-dark.png',
+    title: "Personal dashboard v1",
+    description: "For personal usage and reports",
+    categories: ["dashboards"],
+    src: "/img/screens/dashboards-personal-1.png",
+    srcDark: "/img/screens/dashboards-personal-1-dark.png",
     order: 1,
   },
-})
+});
 
-const areaCustomers = reactive(useAreaCustomers())
-const radialBarTeam = reactive(useRadialBarTeam())
-const barProfit = reactive(useBarProfit())
+const areaCustomers = reactive(useAreaCustomers());
+const radialBarTeam = reactive(useRadialBarTeam());
+const barProfit = reactive(useBarProfit());
 
 function useAreaCustomers() {
-  const { primary, info, success } = useTailwindColors()
-  const type = 'area'
-  const height = 258
+  const { primary, info, success } = useTailwindColors();
+  const type = "area";
+  const height = 258;
 
   const options = {
     chart: {
@@ -30,65 +30,65 @@ function useAreaCustomers() {
     title: {
       show: false,
       text: undefined,
-      align: 'left',
+      align: "left",
     },
     legend: {
       show: true,
-      position: 'top',
+      position: "top",
     },
     dataLabels: {
       enabled: false,
     },
     stroke: {
       width: [2, 2, 2],
-      curve: 'smooth',
+      curve: "smooth",
     },
     xaxis: {
-      type: 'datetime',
+      type: "datetime",
       categories: [
-        '2020-09-19T00:00:00.000Z',
-        '2020-09-20T01:30:00.000Z',
-        '2020-09-21T02:30:00.000Z',
-        '2020-09-22T03:30:00.000Z',
-        '2020-09-23T04:30:00.000Z',
-        '2020-09-24T05:30:00.000Z',
-        '2020-09-25T06:30:00.000Z',
+        "2020-09-19T00:00:00.000Z",
+        "2020-09-20T01:30:00.000Z",
+        "2020-09-21T02:30:00.000Z",
+        "2020-09-22T03:30:00.000Z",
+        "2020-09-23T04:30:00.000Z",
+        "2020-09-24T05:30:00.000Z",
+        "2020-09-25T06:30:00.000Z",
       ],
     },
     tooltip: {
       x: {
-        format: 'dd/MM/yy HH:mm',
+        format: "dd/MM/yy HH:mm",
       },
     },
-  }
+  };
 
   const series = shallowRef([
     {
-      name: 'Returning',
+      name: "Returning",
       data: [31, 40, 28, 51, 42, 109, 100],
     },
     {
-      name: 'Newcomers',
+      name: "Newcomers",
       data: [11, 32, 45, 32, 34, 52, 41],
     },
     {
-      name: 'Abandonned',
+      name: "Abandonned",
       data: [78, 53, 36, 10, 14, 5, 2],
     },
-  ])
+  ]);
 
   return {
     type,
     height,
     options,
     series,
-  }
+  };
 }
 
 function useRadialBarTeam() {
-  const { primary } = useTailwindColors()
-  const type = 'radialBar'
-  const height = 455
+  const { primary } = useTailwindColors();
+  const type = "radialBar";
+  const height = 455;
 
   const options = {
     title: {
@@ -108,21 +108,21 @@ function useRadialBarTeam() {
         startAngle: -90,
         endAngle: 90,
         track: {
-          background: '#e7e7e7',
-          strokeWidth: '97%',
+          background: "#e7e7e7",
+          strokeWidth: "97%",
           margin: 5, // margin is in pixels
           dropShadow: {
             enabled: false,
             top: 2,
             left: 0,
-            color: '#999',
+            color: "#999",
             opacity: 1,
             blur: 2,
           },
         },
         hollow: {
           margin: 0,
-          size: '40%',
+          size: "40%",
         },
         dataLabels: {
           name: {
@@ -130,7 +130,7 @@ function useRadialBarTeam() {
           },
           value: {
             offsetY: -2,
-            fontSize: '22px',
+            fontSize: "22px",
           },
         },
       },
@@ -141,9 +141,9 @@ function useRadialBarTeam() {
       },
     },
     fill: {
-      type: 'gradient',
+      type: "gradient",
       gradient: {
-        shade: 'light',
+        shade: "light",
         shadeIntensity: 0.1,
         inverseColors: false,
         opacityFrom: 1,
@@ -151,23 +151,23 @@ function useRadialBarTeam() {
         stops: [0, 50, 53, 91],
       },
     },
-    labels: ['Average Results'],
-  }
+    labels: ["Average Results"],
+  };
 
-  const series = shallowRef([76])
+  const series = shallowRef([76]);
 
   return {
     type,
     height,
     options,
     series,
-  }
+  };
 }
 
 function useBarProfit() {
-  const { primary } = useTailwindColors()
-  const type = 'bar'
-  const height = 255
+  const { primary } = useTailwindColors();
+  const type = "bar";
+  const height = 255;
 
   const options = {
     chart: {
@@ -178,24 +178,24 @@ function useBarProfit() {
     plotOptions: {
       bar: {
         dataLabels: {
-          position: 'top', // top, center, bottom
+          position: "top", // top, center, bottom
         },
       },
     },
     dataLabels: {
       enabled: true,
       formatter: function (val: string) {
-        return val + '%'
+        return val + "%";
       },
       offsetY: -20,
       style: {
-        fontSize: '12px',
-        colors: ['#304758'],
+        fontSize: "12px",
+        colors: ["#304758"],
       },
     },
     xaxis: {
-      categories: ['May', 'Jun', 'Jul', 'Aug', 'Sep'],
-      position: 'top',
+      categories: ["May", "Jun", "Jul", "Aug", "Sep"],
+      position: "top",
       axisBorder: {
         show: false,
       },
@@ -204,10 +204,10 @@ function useBarProfit() {
       },
       crosshairs: {
         fill: {
-          type: 'gradient',
+          type: "gradient",
           gradient: {
-            colorFrom: '#D8E3F0',
-            colorTo: '#BED1E6',
+            colorFrom: "#D8E3F0",
+            colorTo: "#BED1E6",
             stops: [0, 100],
             opacityFrom: 0.4,
             opacityTo: 0.5,
@@ -228,111 +228,106 @@ function useBarProfit() {
       labels: {
         show: false,
         formatter: function (val: string) {
-          return val + '%'
+          return val + "%";
         },
       },
     },
     colors: [primary.value],
     title: {
       text: undefined,
-      align: 'left',
+      align: "left",
     },
-  }
+  };
 
   const series = shallowRef([
     {
-      name: 'Ratio',
+      name: "Ratio",
       data: [2.3, 3.1, 4.0, 10.1, 4.0],
     },
-  ])
+  ]);
 
   return {
     type,
     height,
     options,
     series,
-  }
+  };
 }
 
-// my code 
+// my code
 // =============================== my code =========================
-import { useAuthStore } from '~/stores/auth'
-import { useRoute, useRouter } from 'vue-router';
+import { useAuthStore } from "~/stores/auth";
+import { useRoute, useRouter } from "vue-router";
 
 // define api_route
-const config = useRuntimeConfig()
-const apiUrl = config.public.apiUrl
+const config = useRuntimeConfig();
+const apiUrl = config.public.apiUrl;
 
 const route = useRoute();
 const router = useRouter();
 
-
-const authStore = useAuthStore()
+const authStore = useAuthStore();
 
 const data = 1;
 
 // middleware for authentication
 definePageMeta({
-  middleware: ['auth']
-})
-
- // Send the data using fetch
-//  fetch('http://localhost:8000/api/v1/get-active-booking')
-//   .then(response => response.json())
-//   .then(data => console.log('Success:', data))
-//   .catch(error => console.error('Error:', error));
-
+  middleware: ["auth"],
+});
 
 // Define the service descriptions
 const serviceDescriptions = {
   "1": "Simple haircut for men",
   "2": "Simple haircut for men + Wash",
   "3": "Simple haircut for woman",
-  "4": "Simple haircut for woman + Wash"
+  "4": "Simple haircut for woman + Wash",
 };
 
 // Define a ref to hold booking data
 const bookings = ref([]);
-
 // Fetch data on component mount
 onMounted(async () => {
+
+  console.log("Token:", token);
+
+
   try {
     const response = await fetch(`${apiUrl}/api/v1/get-active-booking`);
     const data = await response.json();
     bookings.value = data.bookings;
 
-    console.log('bookings.value', bookings.value);
-    
-
+    console.log("bookings.value", bookings.value);
   } catch (error) {
-    console.error('Error fetching bookings:', error);
+    console.error("Error fetching bookings:", error);
   }
 });
 
-
 // =================== my code =========================
+const { token } = useAuthStore();
 
 // Method to handle user update
 const cancelBooking = async (id: number) => {
   console.log(id);
-  const toaster = useToaster();  // Ensure the toaster instance is initialized
+  const toaster = useToaster(); // Ensure the toaster instance is initialized
 
   try {
     const response = await fetch(`${apiUrl}/api/v1/cancel-booking/${id}`, {
-      method: 'POST',
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        Accept: "application/json",
+        Authorization: `Bearer ${token}`, // Use backticks for template literals
+        "Content-Type": "application/json", // Ensure this is included
       },
     });
     if (!response.ok) {
-      throw new Error('Failed to cancel booking');
+      throw new Error("Failed to cancel booking");
     }
-    
+
     // Update the local bookings array
-    bookings.value = bookings.value.filter(booking => booking.id !== id);
+    bookings.value = bookings.value.filter((booking) => booking.id !== id);
 
     // Show the success message
-    toaster.clearAll();  // Clear any previous toasts
+    toaster.clearAll(); // Clear any previous toasts
     toaster.show({
       title: "Success",
       message: `Booking has been successfully canceled!`,
@@ -345,9 +340,9 @@ const cancelBooking = async (id: number) => {
     // Optionally navigate to a different page after updating
     // router.push('/dashboards/hairdresser');
   } catch (error) {
-    console.error('Error canceling booking:', error);
+    console.error("Error canceling booking:", error);
     // Optionally show an error toaster message
-    toaster.clearAll();  // Clear any previous toasts
+    toaster.clearAll(); // Clear any previous toasts
     toaster.show({
       title: "Error",
       message: `Failed to cancel booking. Please try again.`,
@@ -359,28 +354,29 @@ const cancelBooking = async (id: number) => {
   }
 };
 
-
-// completed Method 
+// completed Method
 const markCompleted = async (id: number) => {
   console.log(id);
-  const toaster = useToaster();  // Ensure the toaster instance is initialized
+  const toaster = useToaster(); // Ensure the toaster instance is initialized
 
   try {
     const response = await fetch(`${apiUrl}/api/v1/mark-completed/${id}`, {
-      method: 'POST',
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        Accept: "application/json",
+        Authorization: `Bearer ${token}`, // Use backticks for template literals
+        "Content-Type": "application/json", // Ensure this is included
       },
     });
     if (!response.ok) {
-      throw new Error('Failed to cancel booking');
+      throw new Error("Failed to cancel booking");
     }
-    
+
     // Update the local bookings array
-    bookings.value = bookings.value.filter(booking => booking.id !== id);
+    bookings.value = bookings.value.filter((booking) => booking.id !== id);
 
     // Show the success message
-    toaster.clearAll();  // Clear any previous toasts
+    toaster.clearAll(); // Clear any previous toasts
     toaster.show({
       title: "Success",
       message: `Booking has been marked completed!`,
@@ -393,9 +389,9 @@ const markCompleted = async (id: number) => {
     // Optionally navigate to a different page after updating
     // router.push('/dashboards/hairdresser');
   } catch (error) {
-    console.error('Error canceling booking:', error);
+    console.error("Error canceling booking:", error);
     // Optionally show an error toaster message
-    toaster.clearAll();  // Clear any previous toasts
+    toaster.clearAll(); // Clear any previous toasts
     toaster.show({
       title: "Error",
       message: `Failed to cancel booking. Please try again.`,
@@ -406,7 +402,6 @@ const markCompleted = async (id: number) => {
     });
   }
 };
-
 </script>
 
 <template>
@@ -425,7 +420,7 @@ const markCompleted = async (id: number) => {
             lead="tight"
             class="text-muted-800 dark:text-white"
           >
-            <span>Welcome back, {{authStore.user.name ?? ''}} </span>
+            <span>Welcome back, {{ authStore.user.name ?? "" }}</span>
           </BaseHeading>
           <BaseParagraph>
             <span class="text-muted-500">
@@ -481,8 +476,8 @@ const markCompleted = async (id: number) => {
                   weight="semibold"
                   lead="tight"
                   class="text-muted-800 dark:text-white"
-                > 
-                <span>0</span>
+                >
+                  <span>0</span>
                   <!-- <span>${{authStore.user.sales_this_month ?? }}</span> -->
                 </BaseHeading>
                 <BaseParagraph size="sm">
@@ -573,8 +568,8 @@ const markCompleted = async (id: number) => {
                   class="text-muted-800 dark:text-white"
                 >
                   <!-- <span>6816.32</span> -->
-                   <span>0</span>
-                   <!-- <span>${{authStore.user.sales_this_month ?? 0}}</span> -->
+                  <span>0</span>
+                  <!-- <span>${{authStore.user.sales_this_month ?? 0}}</span> -->
                 </BaseHeading>
                 <BaseParagraph size="sm">
                   <span class="text-muted-500 dark:text-muted-400">
@@ -604,91 +599,144 @@ const markCompleted = async (id: number) => {
           <AddonApexcharts v-bind="areaCustomers" class="-ms-4" />
         </BaseCard>
       </div>
-  <!--Transactions-->
-  <div class="col-span-12">
-    <BaseCard rounded="md" shadow="hover" class="p-8">
-      <div class="mb-8 flex items-center justify-between">
-        <BaseHeading
-          as="h4"
-          size="sm"
-          weight="medium"
-          lead="none"
-          class="text-muted-400 uppercase"
-        >
-          Active Booking
-        </BaseHeading>
+      <!--Transactions-->
+      <div class="col-span-12">
+        <BaseCard rounded="md" shadow="hover" class="p-8">
+          <div class="mb-8 flex items-center justify-between">
+            <BaseHeading
+              as="h4"
+              size="sm"
+              weight="medium"
+              lead="none"
+              class="text-muted-400 uppercase"
+            >
+              Active Booking
+            </BaseHeading>
+          </div>
+
+          <div class="mt-7 overflow-x-auto">
+            <div v-if="!data || data.length === 0">
+              <BasePlaceholderPage
+                title="Nothing to show"
+                subtitle="Looks like there are no booking to show for this recipient. Come back latter."
+              />
+            </div>
+            <table v-else class="w-full whitespace-nowrap">
+              <thead>
+                <tr>
+                  <th class="py-2 text-left">Name</th>
+                  <th class="py-2">Email</th>
+                  <th class="py-2">Phone</th>
+                  <th class="py-2">Date</th>
+                  <th class="py-2">Service</th>
+                  <th class="py-2">Time</th>
+                  <th class="py-2">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr v-for="booking in bookings" :key="booking.id">
+                  <td class="py-2">
+                    <BaseText
+                      size="sm"
+                      weight="medium"
+                      lead="none"
+                      class="text-muted-600 dark:text-muted-300"
+                    >
+                      {{ booking.first_name }} {{ booking.last_name }}
+                    </BaseText>
+                  </td>
+                  <td class="px-4 py-2">
+                    <BaseText
+                      size="sm"
+                      weight="semibold"
+                      lead="none"
+                      class="text-muted-800 dark:text-muted-100"
+                    >
+                      {{ booking.email }}
+                    </BaseText>
+                  </td>
+                  <td class="px-4 py-2">
+                    <BaseText
+                      size="sm"
+                      weight="medium"
+                      lead="none"
+                      class="text-muted-600 dark:text-muted-300"
+                    >
+                      {{ booking.phone }}
+                    </BaseText>
+                  </td>
+                  <td class="px-4 py-2">
+                    <BaseText
+                      size="sm"
+                      weight="medium"
+                      lead="none"
+                      class="text-muted-600 dark:text-muted-300"
+                    >
+                      {{
+                        booking.date
+                          ? new Date(booking.date).toLocaleDateString()
+                          : "N/A"
+                      }}
+                    </BaseText>
+                  </td>
+                  <td class="px-4 py-2">
+                    <BaseText
+                      size="sm"
+                      weight="medium"
+                      lead="none"
+                      class="text-muted-600 dark:text-muted-300"
+                    >
+                      {{
+                        serviceDescriptions[booking.service] ||
+                        "Unknown Service"
+                      }}
+                    </BaseText>
+                  </td>
+                  <td class="px-4 py-2">
+                    <BaseText
+                      size="sm"
+                      weight="medium"
+                      lead="none"
+                      class="text-muted-600 dark:text-muted-300"
+                    >
+                      {{ booking.time }}
+                    </BaseText>
+                  </td>
+                  <td class="px-4 py-2">
+                    <BaseText
+                      size="sm"
+                      weight="medium"
+                      lead="none"
+                      class="text-muted-600 dark:text-muted-300"
+                    >
+                      <button
+                        class="btn btn-success bg-green-600 text-white py-2 px-4 rounded hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500"
+                        @click="markCompleted(booking.id)"
+                      >
+                        Completed
+                      </button>
+                    </BaseText>
+
+                    <BaseText
+                      size="sm"
+                      weight="medium"
+                      lead="none"
+                      class="text-muted-600 dark:text-muted-300"
+                    >
+                      <button
+                        class="btn btn-danger bg-red-600 text-white py-2 px-4 rounded hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500"
+                        @click="cancelBooking(booking.id)"
+                      >
+                        Cancel
+                      </button>
+                    </BaseText>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </BaseCard>
       </div>
-  
-      <div class="mt-7 overflow-x-auto">
-        <div v-if="!data || data.length === 0">
-          <BasePlaceholderPage
-            title="Nothing to show"
-            subtitle="Looks like there are no booking to show for this recipient. Come back latter."
-          />
-        </div>
-        <table v-else class="w-full whitespace-nowrap">
-          <thead>
-            <tr>
-              <th class="py-2 text-left">Name</th>
-              <th class="py-2">Email</th>
-              <th class="py-2">Phone</th>
-              <th class="py-2">Date</th>
-              <th class="py-2">Service</th>
-              <th class="py-2">Time</th>
-              <th class="py-2">Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr v-for="booking in bookings" :key="booking.id">
-              <td class="py-2">
-                <BaseText size="sm" weight="medium" lead="none" class="text-muted-600 dark:text-muted-300">
-                  {{ booking.first_name }} {{ booking.last_name }}
-                </BaseText>
-              </td>
-              <td class="px-4 py-2">
-                <BaseText size="sm" weight="semibold" lead="none" class="text-muted-800 dark:text-muted-100">
-                  {{ booking.email }}
-                </BaseText>
-              </td>
-              <td class="px-4 py-2">
-                <BaseText size="sm" weight="medium" lead="none" class="text-muted-600 dark:text-muted-300">
-                  {{ booking.phone }}
-                </BaseText>
-              </td>
-              <td class="px-4 py-2">
-                <BaseText size="sm" weight="medium" lead="none" class="text-muted-600 dark:text-muted-300">
-                  {{ booking.date ? new Date(booking.date).toLocaleDateString() : 'N/A' }}
-                </BaseText>
-              </td>
-              <td class="px-4 py-2">
-                <BaseText size="sm" weight="medium" lead="none" class="text-muted-600 dark:text-muted-300">
-                  {{ serviceDescriptions[booking.service] || 'Unknown Service' }}
-                </BaseText>
-              </td>
-              <td class="px-4 py-2">
-                <BaseText size="sm" weight="medium" lead="none" class="text-muted-600 dark:text-muted-300">
-                  {{ booking.time }}
-                </BaseText>
-              </td>
-              <td class="px-4 py-2">
-                <BaseText size="sm" weight="medium" lead="none" class="text-muted-600 dark:text-muted-300">
-                  <button class="btn btn-success bg-green-600 text-white py-2 px-4 rounded hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500" @click="markCompleted(booking.id)">
-                    Completed
-                  </button>
-                </BaseText>
-                
-                <BaseText size="sm" weight="medium" lead="none" class="text-muted-600 dark:text-muted-300">
-                  <button class="btn btn-danger bg-red-600 text-white py-2 px-4 rounded hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500" @click="cancelBooking(booking.id)">
-                    Cancel
-                  </button>
-                </BaseText>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </BaseCard>
-  </div>
     </div>
   </div>
 </template>
