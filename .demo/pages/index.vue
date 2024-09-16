@@ -1169,7 +1169,14 @@ const users = ref([]);
 // Fetch data on component mount
 onMounted(async () => {
   try {
-    const response = await fetch(`${apiUrl}/api/v1/get-hairdresser`);
+    const response = await fetch(`${apiUrl}/api/v1/get-hairdresser`, {
+      method: "GET",
+      headers: {
+        Accept: "application/json",
+        Authorization: `Bearer ${token}`, // Use backticks for template literals
+        "Content-Type": "application/json", // Ensure this is included
+      },
+    });
     const data = await response.json();
     users.value = data.users;
     console.log(users.value);

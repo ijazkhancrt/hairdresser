@@ -287,15 +287,17 @@ const serviceDescriptions = {
 const bookings = ref([]);
 // Fetch data on component mount
 onMounted(async () => {
-
-  console.log("Token:", token);
-
-
   try {
-    const response = await fetch(`${apiUrl}/api/v1/get-active-booking`);
+    const response = await fetch(`${apiUrl}/api/v1/get-active-booking`, {
+      method: "GET",
+      headers: {
+        Accept: "application/json",
+        Authorization: `Bearer ${token}`, // Use backticks for template literals
+        "Content-Type": "application/json", // Ensure this is included
+      },
+    });
     const data = await response.json();
     bookings.value = data.bookings;
-
     console.log("bookings.value", bookings.value);
   } catch (error) {
     console.error("Error fetching bookings:", error);

@@ -397,7 +397,7 @@ const users = ref([]);
 // Fetch data on component mount
 onMounted(async () => {
   try {
-    const response = await fetch("http://localhost:8000/api/v1/get-all-bookings",
+    const response = await fetch("http://localhost:8000/api/v1/get-active-booking",
     { method: "GET",
       headers: {
         Accept: "application/json",
@@ -411,6 +411,8 @@ onMounted(async () => {
     bookings.value = data.booking;
     // You might need to filter or transform the data here
     pendingEvents.value = data.booking; // Example filter
+    console.log('pendingEvents.value', pendingEvents.value);
+    
     console.log(pendingEvents.value);
   } catch (error) {
     console.error("Error fetching bookings:", error);

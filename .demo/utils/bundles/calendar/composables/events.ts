@@ -10,6 +10,8 @@ interface UseCalendarEventsProps {
 // define api_route
 const config = useRuntimeConfig()
 const apiUrl = config.public.apiUrl
+import { useAuthStore } from "~/stores/auth";
+const { token } = useAuthStore();
 
 export function useCalendarEvents(props: UseCalendarEventsProps) {
   const calendarEvents = ref<CalendarCustomAttribute<CalendarEvent>[]>([]);
@@ -27,7 +29,14 @@ export function useCalendarEvents(props: UseCalendarEventsProps) {
 
   // Fetch data on component mount
     try {
-      const response = await fetch(`${apiUrl}/api/v1/get-all-bookings`);
+      const response = await fetch(`${apiUrl}/api/v1/get-active-booking`, {
+        method: "GET",
+        headers: {
+          Accept: "application/json",
+          Authorization: `Bearer ${token}`, // Use backticks for template literals
+          "Content-Type": "application/json", // Ensure this is included
+        },
+      });
       const data = await response.json();
       // Assuming the bookings array directly represents pending events
       bookings.value = data.bookings;

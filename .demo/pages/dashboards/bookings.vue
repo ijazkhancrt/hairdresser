@@ -3,6 +3,7 @@
 // my code 
 import { useAuthStore } from '~/stores/auth'
 const authStore = useAuthStore()
+const { token } = useAuthStore();
 
 definePageMeta({
   middleware: ['auth']
@@ -28,7 +29,14 @@ const bookings = ref([]);
 // Fetch data on component mount
 onMounted(async () => {
   try {
-    const response = await fetch(`${apiUrl}/api/v1/get-all-bookings`);
+    const response = await fetch(`${apiUrl}/api/v1/get-all-bookings`, {
+      method: "GET",
+      headers: {
+        Accept: "application/json",
+        Authorization: `Bearer ${token}`, // Use backticks for template literals
+        "Content-Type": "application/json", // Ensure this is included
+      },
+    });
     const data = await response.json();
     bookings.value = data.booking;
     console.log(data.booking);

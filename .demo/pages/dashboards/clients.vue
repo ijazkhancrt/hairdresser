@@ -13,10 +13,10 @@ definePageMeta({
 
 // my code
 import { useAuthStore } from "~/stores/auth";
+const { token } = useAuthStore();
 // define api_route
 const config = useRuntimeConfig();
 const apiUrl = config.public.apiUrl;
-const { token } = useAuthStore();
 
 definePageMeta({
   middleware: ["auth"],
@@ -27,7 +27,14 @@ const users = ref([]);
 // Fetch data on component mount
 onMounted(async () => {
   try {
-    const response = await fetch(`${apiUrl}/api/v1/get-clients`);
+    const response = await fetch(`${apiUrl}/api/v1/get-clients`, {
+      method: "GET",
+      headers: {
+        Accept: "application/json",
+        Authorization: `Bearer ${token}`, // Use backticks for template literals
+        "Content-Type": "application/json", // Ensure this is included
+      },
+    });
     const data = await response.json();
     users.value = data.clients;
     console.log("users.value", users.value);

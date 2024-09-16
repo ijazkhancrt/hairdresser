@@ -26,7 +26,14 @@ const bookings = ref([]);
 
 onMounted(async () => {
   try {
-    const response = await fetch(`${apiUrl}/api/v1/get-all-bookings`);
+    const response = await fetch(`${apiUrl}/api/v1/get-all-bookings`, {
+      method: "GET",
+      headers: {
+        Accept: "application/json",
+        Authorization: `Bearer ${token}`, // Use backticks for template literals
+        "Content-Type": "application/json", // Ensure this is included
+      },
+    });
     const data = await response.json();
     bookings.value = data.bookings;
   } catch (error) {
