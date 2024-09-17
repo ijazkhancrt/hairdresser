@@ -1126,12 +1126,7 @@ const apiUrl = config.public.apiUrl;
 
 import { defineProps } from 'vue'
 
-const props = defineProps({
-  id: {
-    type: String,
-    required: true
-  }
-})
+
 
 // Set page meta and head elements
 useHead({

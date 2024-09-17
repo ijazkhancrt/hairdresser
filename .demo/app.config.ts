@@ -50,9 +50,9 @@ export default defineAppConfig({
           {
             component: 'DemoCircularMenuLanguage',
           },
-          {
-            component: 'DemoCircularMenuNotifications',
-          },
+          // {
+          //   component: 'DemoCircularMenuNotifications',
+          // },
           {
             component: 'DemoCircularMenuActivity',
           },
@@ -150,9 +150,9 @@ export default defineAppConfig({
           {
             component: 'DemoCircularMenuLanguage',
           },
-          {
-            component: 'DemoCircularMenuNotifications',
-          },
+          // {
+          //   component: 'DemoCircularMenuNotifications',
+          // },
           {
             component: 'DemoCircularMenuActivity',
           },
@@ -413,9 +413,9 @@ export default defineAppConfig({
           {
             component: 'DemoCircularMenuLanguage',
           },
-          {
-            component: 'DemoCircularMenuNotifications',
-          },
+          // {
+          //   component: 'DemoCircularMenuNotifications',
+          // },
           {
             component: 'DemoCircularMenuActivity',
           },
@@ -633,9 +633,9 @@ export default defineAppConfig({
           {
             component: 'DemoCircularMenuLanguage',
           },
-          {
-            component: 'DemoCircularMenuNotifications',
-          },
+          // {
+          //   component: 'DemoCircularMenuNotifications',
+          // },
           {
             component: 'DemoCircularMenuActivity',
           },

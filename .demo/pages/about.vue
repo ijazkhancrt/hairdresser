@@ -1,7 +1,7 @@
 <template>
-
-    <!-- Navbar -->
-    <nav class="custom-navbar">
+    <div class="container">
+      <!-- Navbar -->
+      <nav class="custom-navbar">
         <div class="custom-container">
           <!-- Brand Name -->
           <NuxtLink class="navbar-brand" to="/">BrandName</NuxtLink>
@@ -20,9 +20,9 @@
               <li class="custom-nav-item">
                 <NuxtLink class="nav-link" to="/about">About</NuxtLink>
               </li>
-              <li class="custom-nav-item">
+              <!-- <li class="custom-nav-item">
                 <NuxtLink class="nav-link" to="/services">Services</NuxtLink>
-              </li>
+              </li> -->
               <li class="custom-nav-item">
                 <NuxtLink class="nav-link" to="/contact">Contact</NuxtLink>
               </li>
@@ -30,356 +30,141 @@
           </div>
         </div>
       </nav>
-
-
-      
-<div class="container mt-2">
-
-    <nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E&#34;);"
-        aria-label="breadcrumb">
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item main"><a href="#"><b>Services</b></a></li>
-            <li class="breadcrumb-item active" aria-current="page">Professional</li>
-            <li class="breadcrumb-item active" aria-current="page">Time</li>
-            <li class="breadcrumb-item active" aria-current="page">Confirm</li>
-        </ol>
-    </nav>
-
-    <div class="row  d-flex justify-content-between">
-        <div class="col-md-6 select-services">
-            <h1 class="my-2"><b>Select services</b></h1>
-            <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
-                <li class="nav-item" role="presentation">
-                    <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill"
-                        data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home"
-                        aria-selected="true">
-                        Hair & styling
-                    </button>
-                </li>
-                <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill"
-                        data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile"
-                        aria-selected="false">
-                        Children's clip
-                    </button>
-                </li>
-                <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="pills-contact-tab" data-bs-toggle="pill"
-                        data-bs-target="#pills-contact" type="button" role="tab" aria-controls="pills-contact"
-                        aria-selected="false">
-                        Beard
-                    </button>
-                </li>
-                <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="extra-services-tab" data-bs-toggle="pill"
-                        data-bs-target="#extra-services" type="button" role="tab" aria-controls="extra-services"
-                        aria-selected="false">
-                        Extra service
-                    </button>
-                </li>
-            </ul>
-            <div class="tab-content" id="pills-tabContent">
-                <!--  -->
-                <div class="tab-pane fade show active" id="pills-home" role="tabpanel"
-                    aria-labelledby="pills-home-tab" tabindex="0">
-                    <h1 class="mb-3"><b>Hair & styling</b></h1>
-                    <div class="card my-3">
-                        <div class="card-body m-2 d-flex justify-content-between align-items-center">
-                            <div>
-                                <h5 class="card-title">Machine cut</h5>
-                                <h6 class="card-subtitle mb-2 text-body-secondary">15 min • Men only</h6>
-                                <p class="card-text">Dell cut/single machine haircut</p>
-                                <h6 class="card-subtitle mb-2 text-body-secondary">NOK 300</h6>
-                            </div>
-                            <button class="btn btn-light">
-                                <h1><b>+</b></h1>
-                            </button>
-                        </div>
-                    </div>
-
-                    <div class="card my-3">
-                        <div class="card-body m-2 d-flex justify-content-between align-items-center">
-                            <div>
-                                <h5 class="card-title">Machine cut</h5>
-                                <h6 class="card-subtitle mb-2 text-body-secondary">15 min • Men only</h6>
-                                <p class="card-text">Dell cut/single machine haircut</p>
-                                <h6 class="card-subtitle mb-2 text-body-secondary">NOK 300</h6>
-                            </div>
-                            <button class="btn btn-light">
-                                <h1><b>+</b></h1>
-                            </button>
-                        </div>
-                    </div>
-
-                    <div class="card my-3">
-                        <div class="card-body m-2 d-flex justify-content-between align-items-center">
-                            <div>
-                                <h5 class="card-title">Machine cut</h5>
-                                <h6 class="card-subtitle mb-2 text-body-secondary">15 min • Men only</h6>
-                                <p class="card-text">Dell cut/single machine haircut</p>
-                                <h6 class="card-subtitle mb-2 text-body-secondary">NOK 300</h6>
-                            </div>
-                            <button class="btn btn-light">
-                                <h1><b>+</b></h1>
-                            </button>
-                        </div>
-                    </div>
-
-                    <div class="card my-3">
-                        <div class="card-body m-2 d-flex justify-content-between align-items-center">
-                            <div>
-                                <h5 class="card-title">Machine cut</h5>
-                                <h6 class="card-subtitle mb-2 text-body-secondary">15 min • Men only</h6>
-                                <p class="card-text">Dell cut/single machine haircut</p>
-                                <h6 class="card-subtitle mb-2 text-body-secondary">NOK 300</h6>
-                            </div>
-                            <button class="btn btn-light">
-                                <h1><b>+</b></h1>
-                            </button>
-                        </div>
-                    </div>
-
-                </div>
-
-
-                <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab"
-                    tabindex="0">
-                    <h1 class="mb-3"><b>Children's clip</b></h1>
-                    <div class="card my-3">
-                        <div class="card-body m-2 d-flex justify-content-between align-items-center">
-                            <div>
-                                <h5 class="card-title">Machine cut</h5>
-                                <h6 class="card-subtitle mb-2 text-body-secondary">15 min • Men only</h6>
-                                <p class="card-text">Dell cut/single machine haircut</p>
-                                <h6 class="card-subtitle mb-2 text-body-secondary">NOK 300</h6>
-                            </div>
-                            <button class="btn btn-light">
-                                <h1><b>+</b></h1>
-                            </button>
-                        </div>
-                    </div>
-
-                    <div class="card my-3">
-                        <div class="card-body m-2 d-flex justify-content-between align-items-center">
-                            <div>
-                                <h5 class="card-title">Machine cut</h5>
-                                <h6 class="card-subtitle mb-2 text-body-secondary">15 min • Men only</h6>
-                                <p class="card-text">Dell cut/single machine haircut</p>
-                                <h6 class="card-subtitle mb-2 text-body-secondary">NOK 300</h6>
-                            </div>
-                            <button class="btn btn-light">
-                                <h1><b>+</b></h1>
-                            </button>
-                        </div>
-                    </div>
-
-                    <div class="card my-3">
-                        <div class="card-body m-2 d-flex justify-content-between align-items-center">
-                            <div>
-                                <h5 class="card-title">Machine cut</h5>
-                                <h6 class="card-subtitle mb-2 text-body-secondary">15 min • Men only</h6>
-                                <p class="card-text">Dell cut/single machine haircut</p>
-                                <h6 class="card-subtitle mb-2 text-body-secondary">NOK 300</h6>
-                            </div>
-                            <button class="btn btn-light">
-                                <h1><b>+</b></h1>
-                            </button>
-                        </div>
-                    </div>
-
-                    <div class="card my-3">
-                        <div class="card-body m-2 d-flex justify-content-between align-items-center">
-                            <div>
-                                <h5 class="card-title">Machine cut</h5>
-                                <h6 class="card-subtitle mb-2 text-body-secondary">15 min • Men only</h6>
-                                <p class="card-text">Dell cut/single machine haircut</p>
-                                <h6 class="card-subtitle mb-2 text-body-secondary">NOK 300</h6>
-                            </div>
-                            <button class="btn btn-light">
-                                <h1><b>+</b></h1>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab"
-                    tabindex="0">
-                    <h1 class="mb-3"><b>Beard</b></h1>
-                    <div class="card my-3">
-                        <div class="card-body m-2 d-flex justify-content-between align-items-center">
-                            <div>
-                                <h5 class="card-title">Machine cut</h5>
-                                <h6 class="card-subtitle mb-2 text-body-secondary">15 min • Men only</h6>
-                                <p class="card-text">Dell cut/single machine haircut</p>
-                                <h6 class="card-subtitle mb-2 text-body-secondary">NOK 300</h6>
-                            </div>
-                            <button class="btn btn-light">
-                                <h1><b>+</b></h1>
-                            </button>
-                        </div>
-                    </div>
-
-                    <div class="card my-3">
-                        <div class="card-body m-2 d-flex justify-content-between align-items-center">
-                            <div>
-                                <h5 class="card-title">Machine cut</h5>
-                                <h6 class="card-subtitle mb-2 text-body-secondary">15 min • Men only</h6>
-                                <p class="card-text">Dell cut/single machine haircut</p>
-                                <h6 class="card-subtitle mb-2 text-body-secondary">NOK 300</h6>
-                            </div>
-                            <button class="btn btn-light">
-                                <h1><b>+</b></h1>
-                            </button>
-                        </div>
-                    </div>
-
-                    <div class="card my-3">
-                        <div class="card-body m-2 d-flex justify-content-between align-items-center">
-                            <div>
-                                <h5 class="card-title">Machine cut</h5>
-                                <h6 class="card-subtitle mb-2 text-body-secondary">15 min • Men only</h6>
-                                <p class="card-text">Dell cut/single machine haircut</p>
-                                <h6 class="card-subtitle mb-2 text-body-secondary">NOK 300</h6>
-                            </div>
-                            <button class="btn btn-light">
-                                <h1><b>+</b></h1>
-                            </button>
-                        </div>
-                    </div>
-
-                    <div class="card my-3">
-                        <div class="card-body m-2 d-flex justify-content-between align-items-center">
-                            <div>
-                                <h5 class="card-title">Machine cut</h5>
-                                <h6 class="card-subtitle mb-2 text-body-secondary">15 min • Men only</h6>
-                                <p class="card-text">Dell cut/single machine haircut</p>
-                                <h6 class="card-subtitle mb-2 text-body-secondary">NOK 300</h6>
-                            </div>
-                            <button class="btn btn-light">
-                                <h1><b>+</b></h1>
-                            </button>
-                        </div>
-                    </div>
-
-                    <div class="card my-3">
-                        <div class="card-body m-2 d-flex justify-content-between align-items-center">
-                            <div>
-                                <h5 class="card-title">Machine cut</h5>
-                                <h6 class="card-subtitle mb-2 text-body-secondary">15 min • Men only</h6>
-                                <p class="card-text">Dell cut/single machine haircut</p>
-                                <h6 class="card-subtitle mb-2 text-body-secondary">NOK 300</h6>
-                            </div>
-                            <button class="btn btn-light">
-                                <h1><b>+</b></h1>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="tab-pane fade" id="extra-services" role="tabpanel" aria-labelledby="extra-services-tab"
-                    tabindex="0">
-                    <h1 class="mb-3"><b>Extra Services</b></h1>
-                    <div class="card my-3">
-                        <div class="card-body m-2 d-flex justify-content-between align-items-center">
-                            <div>
-                                <h5 class="card-title">Machine cut</h5>
-                                <h6 class="card-subtitle mb-2 text-body-secondary">15 min • Men only</h6>
-                                <p class="card-text">Dell cut/single machine haircut</p>
-                                <h6 class="card-subtitle mb-2 text-body-secondary">NOK 300</h6>
-                            </div>
-                            <button class="btn btn-light">
-                                <h1><b>+</b></h1>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card my-3">
-                    <div class="card-body m-2 d-flex justify-content-between align-items-center">
-                        <div>
-                            <h5 class="card-title">Machine cut</h5>
-                            <h6 class="card-subtitle mb-2 text-body-secondary">15 min • Men only</h6>
-                            <p class="card-text">Dell cut/single machine haircut</p>
-                            <h6 class="card-subtitle mb-2 text-body-secondary">NOK 300</h6>
-                        </div>
-                        <button class="btn btn-light">
-                            <h1><b>+</b></h1>
-                        </button>
-                    </div>
-                </div>
-
-                <div class="card my-3">
-                    <div class="card-body m-2 d-flex justify-content-between align-items-center">
-                        <div>
-                            <h5 class="card-title">Machine cut</h5>
-                            <h6 class="card-subtitle mb-2 text-body-secondary">15 min • Men only</h6>
-                            <p class="card-text">Dell cut/single machine haircut</p>
-                            <h6 class="card-subtitle mb-2 text-body-secondary">NOK 300</h6>
-                        </div>
-                        <button class="btn btn-light">
-                            <h1><b>+</b></h1>
-                        </button>
-                    </div>
-                </div>
-
-                <div class="card my-3">
-                    <div class="card-body m-2 d-flex justify-content-between align-items-center">
-                        <div>
-                            <h5 class="card-title">Machine cut</h5>
-                            <h6 class="card-subtitle mb-2 text-body-secondary">15 min • Men only</h6>
-                            <p class="card-text">Dell cut/single machine haircut</p>
-                            <h6 class="card-subtitle mb-2 text-body-secondary">NOK 300</h6>
-                        </div>
-                        <button class="btn btn-light">
-                            <h1><b>+</b></h1>
-                        </button>
-                    </div>
-                </div>
-
-                <div class="card my-3">
-                    <div class="card-body m-2 d-flex justify-content-between align-items-center">
-                        <div>
-                            <h5 class="card-title">Machine cut</h5>
-                            <h6 class="card-subtitle mb-2 text-body-secondary">15 min • Men only</h6>
-                            <p class="card-text">Dell cut/single machine haircut</p>
-                            <h6 class="card-subtitle mb-2 text-body-secondary">NOK 300</h6>
-                        </div>
-                        <button class="btn btn-light">
-                            <h1><b>+</b></h1>
-                        </button>
-                    </div>
-                </div>
+  
+      <!-- Header Section -->
+      <header class="mt-3">
+        <div class="row w-100">
+          <!-- Column 1 -->
+          <div class="col-md-4 d-flex flex-column justify-content-center align-items-center header-content">
+            <div>
+              <h1><b>Your<br>Perfect<br>Hairstyle<br>Awaits</b></h1>
+              <p>Book an appointment with our expert</p>
             </div>
+          </div>
+  
+          <!-- Column 2 -->
+          <div class="col-md-8 d-flex justify-content-center align-items-center header-image">
+            <img src="/custom/img/header.png" alt="Hair Salon" class="img-fluid">
+          </div>
         </div>
+      </header>
+  
+  
+      <div class="services my-5">
+        <h1><b>Book Your Appointment Online</b></h1>
+        <p>Convenient and hassle-free booking system for your next hair appointment.</p>
+      </div>
+  
+   
+  <!-- about us -->
+  <div class="bg-gray-100 text-gray-900">
+    <!-- Hero Section -->
+    <section class="hero-bg text-white text-center flex items-center justify-center bg-opacity-70">
+      <div>
+        <h1 class="text-4xl font-bold mb-2">About Us</h1>
+        <p class="text-lg">Your Go-To Hair Care Destination</p>
+      </div>
+    </section>
 
-        <div class="col-md-5 selected-services">
-            <div class="card">
-                <div class="card-header">
-                    Selected Services
-                </div>
-                <div class="card-body">
-                    <div class="d-flex align-items-center">
-                        <img src="/custom/img/selected-service.png" class="rounded me-3" width="62px" alt="Image Hairdresser">
-                        <div>
-                            <h5 class="card-title"><b>Image Hairdresser</b></h5>
-                            <h5 class="card-title">Storhaug, Stavanger</h5>
-                        </div>
-                    </div>
-                    <p class="card-text mt-3">No services have been selected</p>
-                    <hr>
-                    <div class="d-flex justify-content-between">
-                        <h5>Total</h5>
-                        <h5>free</h5>
-                    </div>
-                    <div class="mt-5 d-grid gap-2">
-                        <button class="btn btn-secondary" type="button">Continue</button>
-                    </div>
-                </div>
-            </div>
+    <!-- Introduction -->
+    <section class="container mx-auto my-12 px-6 lg:px-0">
+      <h2 class="text-3xl font-semibold mb-6">Welcome to [Your Platform Name]</h2>
+      <p class="text-lg leading-relaxed">
+        At [Your Platform Name], we make booking your next hair appointment a breeze. Whether you’re looking for a quick trim or a complete makeover, our platform connects you with top-rated hairdressers in your area, ensuring you get the best service tailored to your needs.
+      </p>
+    </section>
+
+    <!-- Mission -->
+    <section class="bg-white py-12">
+      <div class="container mx-auto px-6 lg:px-0">
+        <h2 class="text-3xl font-semibold mb-6">Our Mission</h2>
+        <p class="text-lg leading-relaxed">
+          Our mission is to revolutionize the way you book hairdressing appointments. We aim to provide a seamless, user-friendly experience that connects you with skilled professionals who can help you look and feel your best, all from the comfort of your home.
+        </p>
+      </div>
+    </section>
+
+    <!-- Why Choose Us -->
+    <section class="container mx-auto my-12 px-6 lg:px-0">
+      <h2 class="text-3xl font-semibold mb-6">Why Choose Us</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="p-6 bg-white shadow-lg rounded-lg">
+          <h3 class="text-xl font-semibold mb-2">User-Friendly Interface</h3>
+          <p>Our easy-to-navigate platform ensures you can find and book your ideal hairdresser with just a few clicks.</p>
         </div>
+        <div class="p-6 bg-white shadow-lg rounded-lg">
+          <h3 class="text-xl font-semibold mb-2">Verified Professionals</h3>
+          <p>We partner with top-rated hairdressers who are vetted for their expertise and professionalism.</p>
+        </div>
+        <div class="p-6 bg-white shadow-lg rounded-lg">
+          <h3 class="text-xl font-semibold mb-2">Flexible Booking Options</h3>
+          <p>Choose from a range of appointment times and services to suit your schedule and preferences.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Meet the Team -->
+    <section class="team-bg text-white py-12 bg-opacity-70">
+      <div class="container mx-auto px-6 lg:px-0">
+        <h2 class="text-3xl font-semibold mb-6 text-center">Meet the Team</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <!-- Team Member 1 -->
+          <div class="bg-white p-6 rounded-lg shadow-lg text-center">
+            <img
+              src="https://plus.unsplash.com/premium_photo-1664049685781-9f373ed1183a?q=80&w=2030&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+              alt="Team Member"
+              class="w-32 h-32 mx-auto rounded-full mb-4"
+            />
+            <h3 class="text-xl font-semibold mb-2">Jane Doe</h3>
+            <p class="text-gray-600">Lead Stylist</p>
+          </div>
+          <!-- Team Member 2 -->
+          <div class="bg-white p-6 rounded-lg shadow-lg text-center">
+            <img
+              src="https://images.unsplash.com/photo-1632768461274-a7df80fcbc42?q=80&w=1992&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+              alt="Team Member"
+              class="w-32 h-32 mx-auto rounded-full mb-4"
+            />
+            <h3 class="text-xl font-semibold mb-2">John Smith</h3>
+            <p class="text-gray-600">Senior Stylist</p>
+          </div>
+          <!-- Team Member 3 -->
+          <div class="bg-white p-6 rounded-lg shadow-lg text-center">
+            <img
+              src="https://plus.unsplash.com/premium_photo-1661768233835-fd3d1d0ca08a?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+              alt="Team Member"
+              class="w-32 h-32 mx-auto rounded-full mb-4"
+            />
+            <h3 class="text-xl font-semibold mb-2">Emily Johnson</h3>
+            <p class="text-gray-600">Customer Support</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Achievements -->
+    <section class="container mx-auto my-12 px-6 lg:px-0">
+      <h2 class="text-3xl font-semibold mb-6 text-center">Our Achievements</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div class="p-6 bg-white shadow-lg rounded-lg">
+          <h3 class="text-xl font-semibold mb-2">Top Platform Award</h3>
+          <p>Recognized for excellence in customer satisfaction and ease of use.</p>
+        </div>
+        <div class="p-6 bg-white shadow-lg rounded-lg">
+          <h3 class="text-xl font-semibold mb-2">Best User Experience</h3>
+          <p>Awarded for delivering a seamless and intuitive booking experience.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="bg-black text-white text-center py-12">
+      <h2 class="text-3xl font-semibold mb-4">Get In Touch</h2>
+      <p class="text-lg mb-6">We’re here to help you with any questions or feedback. Feel free to contact us or follow us on social media.</p>
+      <a href="mailto:support@yourplatform.com" class="bg-white text-pink-600 px-6 py-3 rounded-lg font-semibold">Contact Us</a>
+    </section>
+  </div>
     </div>
-
-</div>
   </template>
   
   <script setup>
